@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo JF Imoveis - Os Melhores Imóveis da Região</title>
+    <meta name="description" content="Imóveis de luxo nessa cidade, movem pessoas para o melhor lugar, com estilo e qualidade de vida. Viver essa experiência ímpar é garantir para você e sua família o sonho que tanto esperam.">
+    <meta name="keywords" content="imóveis, casas, apartamentos, terrenos, venda, aluguel, imobiliária">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://grupojfimoveis.com/">
+    <meta property="og:title" content="Grupo JF imoveis - Os Melhores Imóveis da Região">
+    <meta property="og:description" content="Imóveis de luxo nessa cidade, movem pessoas para o melhor lugar, com estilo e qualidade de vida. Viver essa experiência ímpar é garantir para você e sua família o sonho que tanto esperam.">
+    <meta property="og:image" content="https://grupojfimoveis.com/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://grupojfimoveis.com/">
+    <meta property="twitter:title" content="Grupo JF Imoveis - Os Melhores Imóveis da Região">
+    <meta property="twitter:description" content="Imóveis de luxo nessa cidade, movem pessoas para o melhor lugar, com estilo e qualidade de vida. Viver essa experiência ímpar é garantir para você e sua família o sonho que tanto esperam.">
+    <meta property="twitter:image" content="https://grupojfimoveis.com/og-image.jpg">
+
+    <!-- Pixel do Facebook (substitua pelo seu ID) -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'SEU_PIXEL_ID_AQUI');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=SEU_PIXEL_ID_AQUI&ev=PageView&noscript=1"/></noscript>
+
+    <!-- Google Analytics (substitua pelo seu ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            background: white;
+            border-radius: 20px 20px 0 0;
+            min-height: calc(100vh - 80px);
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            background: url('hero-bg.jpg.jpeg') no-repeat center center;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 6rem 0;
+            border-radius: 20px 20px 0 0;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* opacidade aqui! */
+            z-index: 0;
+        }
+
+        .hero * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(238, 90, 36, 0.3);
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(238, 90, 36, 0.4);
+        }
+
+        /* About Section */
+        .about {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        /* Properties Section */
+        .properties {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .property-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .property-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .property-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .property-price {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .property-info {
+            padding: 1.5rem;
+        }
+
+        .property-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .property-location {
+            color: #666;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .property-features {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .whatsapp-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        /* Add Property Form */
+        .add-property {
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+            padding: 3rem 0;
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 5px 20px rgba(37, 211, 102, 0.6);
+            }
+            100% {
+                box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .properties-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">🏠 Grupo JF Imoveis</div>
+                <nav>
+                    <ul>
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#sobre">Quem Somos</a></li>
+                        <li><a href="#imoveis">Imóveis</a></li>
+                        <li><a href="#adicionar">Adicionar</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="container">
+                <h1>Altíssimo padrão no melhor de São Paulo</h1>
+                <p>Imóveis de luxo nessa cidade, movem pessoas para o melhor lugar, com estilo e qualidade de vida. Viver essa experiência ímpar é garantir para você e sua família o sonho que tanto esperam.</p>
+                <a href="#imoveis" class="cta-button">Ver Imóveis Disponíveis</a>
+            </div>
+        </section>
+
+        <section id="sobre" class="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>Sobre Nós</h2>
+                        <p>O Grupo JF Imoveis é uma empresa especialista em negócios imobiliários com imóveis de alto padrão e temos as melhores opções em localizações privilegiadas e bairros fascinantes em toda a cidade de São Paulo.  
+Agende uma visita e conheça os nossos imóveis!</p>
+                    </div>
+                    <div class="about-stats">
+                        <img src="agent-photo.jpg.jpeg" alt="" width="500" height="700">
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="imoveis" class="properties">
+            <div class="container">
+                <h2 class="section-title">Imóveis Disponíveis</h2>
+                <div class="properties-grid" id="properties-grid">
+                    <!-- Imóveis serão inseridos aqui via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section id="adicionar" class="add-property">
+            <div class="container">
+                <h2 class="section-title">Adicionar Novo Imóvel</h2>
+                <div class="form-container">
+                    <form id="property-form">
+                        <div class="form-group">
+                            <label for="property-name">Nome do Imóvel</label>
+                            <input type="text" id="property-name" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="property-price">Preço (R$)</label>
+                                <input type="number" id="property-price" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="property-type">Tipo</label>
+                                <select id="property-type" required>
+                                    <option value="">Selecione</option>
+                                    <option value="casa">Casa</option>
+                                    <option value="apartamento">Apartamento</option>
+                                    <option value="terreno">Terreno</option>
+                                    <option value="comercial">Comercial</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="property-location">Localização</label>
+                            <input type="text" id="property-location" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="property-bedrooms">Quartos</label>
+                                <input type="number" id="property-bedrooms" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="property-bathrooms">Banheiros</label>
+                                <input type="number" id="property-bathrooms" min="0">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="property-area">Área (m²)</label>
+                                <input type="number" id="property-area">
+                            </div>
+                            <div class="form-group">
+                                <label for="property-parking">Vagas Garagem</label>
+                                <input type="number" id="property-parking" min="0">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="property-image">URL da Imagem</label>
+                            <input type="url" id="property-image" placeholder="https://exemplo.com/imagem.jpg">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="property-description">Descrição</label>
+                            <textarea id="property-description" rows="4"></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Adicionar Imóvel</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="contact">
+            <div class="container">
+                <h2>Entre em Contato</h2>
+                <p>Estamos prontos para ajudar você a encontrar o imóvel perfeito</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <h3>WhatsApp</h3>
+                        <p>(11) 98500-1595</p>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <h3>E-mail</h3>
+                        <p>contato@grupojfimoveis.com.br</p>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <h3>Endereço</h3>
+                        <p>Jardim Anália Franco - SP</p>
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h3>Encontre-nos</h3>
+                        <a href="https://www.instagram.com/grupojfimoveis/" target="_blank">
+                            <i class="fab fa-instagram" style="font-size: 32px; color: #E4405F;"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@grupojfimoveis" target="_blank">
+                            <i class="fab fa-youtube" style="font-size: 32px; color: #FF0000; margin-left: 10px;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/5511985001595?text=Olá, vi um imóvel no site e gostaria de mais informações." 
+       class="whatsapp-float" target="_blank" rel="noopener">
+        💬
+    </a>
+
+    <script>
+        // Lista de imóveis (simulando dados)
+        let properties = [
+            {
+                id: 1,
+                name: "Casa Moderna em Condomínio",
+                price: 850000,
+                location: "Alphaville, Barueri - SP",
+                bedrooms: 4,
+                bathrooms: 3,
+                area: 280,
+                parking: 2,
+                image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2075&q=80",
+                type: "casa"
+            },
+            {
+                id: 2,
+                name: "Apartamento Vista Mar",
+                price: 450000,
+                location: "Barra da Tijuca, Rio de Janeiro - RJ",
+                bedrooms: 3,
+                bathrooms: 2,
+                area: 120,
+                parking: 1,
+                image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                type: "apartamento"
+            },
+            {
+                id: 3,
+                name: "Cobertura Duplex Luxo",
+                price: 1200000,
+                location: "Jardins, São Paulo - SP",
+                bedrooms: 5,
+                bathrooms: 4,
+                area: 350,
+                parking: 3,
+                image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2053&q=80",
+                type: "apartamento"
+            },
+            {
+                id: 4,
+                name: "Casa de Campo com Piscina",
+                price: 680000,
+                location: "Campos do Jordão - SP",
+                bedrooms: 3,
+                bathrooms: 2,
+                area: 200,
+                parking: 2,
+                image: "https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                type: "casa"
+            }
+        ];
+
+        // Função para formatar preço
+        function formatPrice(price) {
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+                minimumFractionDigits: 0
+            }).format(price);
+        }
+
+        // Função para gerar WhatsApp link
+        function generateWhatsAppLink(propertyName) {
+            const message = encodeURIComponent(`Olá! Vi o imóvel "${propertyName}" no site e gostaria de mais informações.`);
+            return `https://wa.me/5511985001595?text=${message}`;
+        }
+
+        // Função para renderizar imóveis
+        function renderProperties() {
+            const grid = document.getElementById('properties-grid');
+            grid.innerHTML = '';
+
+            properties.forEach(property => {
+                const propertyCard = document.createElement('div');
+                propertyCard.className = 'property-card';
+                propertyCard.innerHTML = `
+                    <div class="property-image" style="background-image: url('${property.image}')">
+                        <div class="property-price">${formatPrice(property.price)}</div>
+                    </div>
+                    <div class="property-info">
+                        <h3 class="property-title">${property.name}</h3>
+                        <div class="property-location">
+                            <span>📍</span>
+                            <span>${property.location}</span>
+                        </div>
+                        <div class="property-features">
+                            <div class="feature">
+                                <span>🛏️</span>
+                                <span>${property.bedrooms} quartos</span>
+                            </div>
+                            <div class="feature">
+                                <span>🚿</span>
+                                <span>${property.bathrooms} banheiros</span>
+                            </div>
+                            <div class="feature">
+                                <span>📐</span>
+                                <span>${property.area}m²</span>
+                            </div>
+                            <div class="feature">
+                                <span>🚗</span>
+                                <span>${property.parking} vagas</span>
+                            </div>
+                        </div>
+                        <a href="${generateWhatsAppLink(property.name)}" 
+                           class="whatsapp-btn" 
+                           target="_blank" 
+                           rel="noopener"
+                           onclick="fbq('track', 'Lead', {content_name: '${property.name}'});">
+                            💬 Tenho Interesse
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(propertyCard);
+            });
+        }
+
+        // Função para adicionar novo imóvel
+        function addProperty(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            const newProperty = {
+                id: Date.now(),
+                name: document.getElementById('property-name').value,
+                price: parseFloat(document.getElementById('property-price').value),
+                location: document.getElementById('property-location').value,
+                bedrooms: parseInt(document.getElementById('property-bedrooms').value) || 0,
+                bathrooms: parseInt(document.getElementById('property-bathrooms').value) || 0,
+                area: parseInt(document.getElementById('property-area').value) || 0,
+                parking: parseInt(document.getElementById('property-parking').value) || 0,
+                image: document.getElementById('property-image').value || 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1973&q=80',
+                type: document.getElementById('property-type').value
+            };
+
+            properties.unshift(newProperty);
+            renderProperties();
+            form.reset();
+            
+            // Scroll para a seção de imóveis
+            document.getElementById('imoveis').scrollIntoView({ behavior: 'smooth' });
+            
+            // Track no Facebook Pixel
+            fbq('track', 'CompleteRegistration', {
+                content_name: 'New Property Added',
+                value: newProperty.price,
+                currency: 'BRL'
+            });
+            
+            alert('Imóvel adicionado com sucesso!');
+        }
+
+        // Smooth scrolling para links de navegação
+        function setupSmoothScrolling() {
+            const links = document.querySelectorAll('nav a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Animações ao scroll
+        function setupScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observar cards de propriedades
+            document.addEventListener('DOMContentLoaded', () => {
+                setTimeout(() => {
+                    const cards = document.querySelectorAll('.property-card');
+                    cards.forEach((card, index) => {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(30px)';
+                        card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+                        observer.observe(card);
+                    });
+                }, 100);
+            });
+        }
+
+        // Header scroll effect
+        function setupHeaderEffect() {
+            let lastScroll = 0;
+            const header = document.querySelector('header');
+            
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > 100) {
+                    header.style.background = 'rgba(255, 255, 255, 0.98)';
+                    header.style.backdropFilter = 'blur(15px)';
+                } else {
+                    header.style.background = 'rgba(255, 255, 255, 0.95)';
+                    header.style.backdropFilter = 'blur(10px)';
+                }
+                
+                lastScroll = currentScroll;
+            });
+        }
+
+        // Formulário de validação aprimorada
+        function setupFormValidation() {
+            const form = document.getElementById('property-form');
+            const inputs = form.querySelectorAll('input, select, textarea');
+            
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    validateField(this);
+                });
+                
+                input.addEventListener('input', function() {
+                    if (this.classList.contains('invalid')) {
+                        validateField(this);
+                    }
+                });
+            });
+        }
+
+        function validateField(field) {
+            const value = field.value.trim();
+            let isValid = true;
+            let errorMessage = '';
+
+            // Remove previous error styling
+            field.classList.remove('invalid');
+            const existingError = field.parentNode.querySelector('.error-message');
+            if (existingError) {
+                existingError.remove();
+            }
+
+            // Required field validation
+            if (field.hasAttribute('required') && !value) {
+                isValid = false;
+                errorMessage = 'Este campo é obrigatório';
+            }
+
+            // Specific validations
+            if (value && field.type === 'number' && parseFloat(value) <= 0) {
+                isValid = false;
+                errorMessage = 'Valor deve ser maior que zero';
+            }
+
+            if (value && field.type === 'url' && !isValidUrl(value)) {
+                isValid = false;
+                errorMessage = 'URL inválida';
+            }
+
+            if (!isValid) {
+                field.classList.add('invalid');
+                const errorElement = document.createElement('div');
+                errorElement.className = 'error-message';
+                errorElement.textContent = errorMessage;
+                errorElement.style.color = '#e74c3c';
+                errorElement.style.fontSize = '0.8rem';
+                errorElement.style.marginTop = '0.3rem';
+                field.parentNode.appendChild(errorElement);
+            }
+
+            return isValid;
+        }
+
+        function isValidUrl(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+
+        // Schema.org structured data para SEO
+        function addStructuredData() {
+            const structuredData = {
+                "@context": "https://schema.org",
+                "@type": "RealEstateAgent",
+                "name": "Grupo JF Imoveis",
+                "description": "Imóveis de luxo nessa cidade, movem pessoas para o melhor lugar, com estilo e qualidade de vida. Viver essa experiência ímpar é garantir para você e sua família o sonho que tanto esperam.",
+                "url": "https://grupojfimoveis.com",
+                "telephone": "+5511985001595",
+                "email": "contato@jfimoveis.com.br",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Rua das Flores, 123",
+                    "addressLocality": "São Paulo",
+                    "addressRegion": "SP",
+                    "addressCountry": "BR"
+                },
+                "sameAs": [
+                    "https://wa.me/5511985001595"
+                ]
+            };
+
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.textContent = JSON.stringify(structuredData);
+            document.head.appendChild(script);
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProperties();
+            setupSmoothScrolling();
+            setupScrollAnimations();
+            setupHeaderEffect();
+            setupFormValidation();
+            addStructuredData();
+
+            // Event listeners
+            document.getElementById('property-form').addEventListener('submit', addProperty);
+
+            // Lazy loading para imagens
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.style.opacity = '1';
+                            observer.unobserve(img);
+                        }
+                    });
+                });
+
+                // Observar todas as imagens de propriedades
+                setTimeout(() => {
+                    const propertyImages = document.querySelectorAll('.property-image');
+                    propertyImages.forEach(img => {
+                        img.style.opacity = '0.8';
+                        img.style.transition = 'opacity 0.3s ease';
+                        imageObserver.observe(img);
+                    });
+                }, 500);
+            }
+
+            // Analytics tracking
+            document.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', function() {
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'navigation', {
+                            'event_category': 'engagement',
+                            'event_label': this.getAttribute('href')
+                        });
+                    }
+                });
+            });
+
+            // Track WhatsApp button clicks
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('whatsapp-btn') || e.target.closest('.whatsapp-btn')) {
+                    if (typeof fbq !== 'undefined') {
+                        fbq('track', 'Contact');
+                    }
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'whatsapp_click', {
+                            'event_category': 'engagement',
+                            'event_label': 'property_interest'
+                        });
+                    }
+                }
+            });
+        });
+
+        // PWA Service Worker (opcional)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(function(registrationError) {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+
+        // Adicionar estilos CSS para validação
+        const validationStyles = `
+            .form-group input.invalid,
+            .form-group select.invalid,
+            .form-group textarea.invalid {
+                border-color: #e74c3c;
+                box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+            }
+            
+            .error-message {
+                animation: fadeInError 0.3s ease-out;
+            }
+            
+            @keyframes fadeInError {
+                from {
+                    opacity: 0;
+                    transform: translateY(-5px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = validationStyles;
+        document.head.appendChild(styleSheet);
+    </script>
+</body>
+</html>
