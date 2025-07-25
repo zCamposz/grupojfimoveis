@@ -47,7 +47,7 @@
         gtag('config', 'GA_MEASUREMENT_ID');
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 
     <style>
@@ -61,7 +61,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #000000 0%, #000000 100%);
             min-height: 100vh;
         }
 
@@ -73,7 +73,7 @@
 
         /* Header */
         header {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(184, 184, 184, 0.95);
             backdrop-filter: blur(10px);
             padding: 1rem 0;
             position: fixed;
@@ -93,7 +93,7 @@
         .logo {
             font-size: 2rem;
             font-weight: bold;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(45deg, #a30b0b, #5e0505);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -107,14 +107,14 @@
 
         nav a {
             text-decoration: none;
-            color: #333;
+            color: rgba(136, 34, 34, 0.95);
             font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
         }
 
         nav a:hover {
-            color: #667eea;
+            color: #6d1212;
             transform: translateY(-2px);
         }
 
@@ -125,7 +125,7 @@
             height: 2px;
             bottom: -5px;
             left: 0;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(45deg, #a30b0b, #5e0505);
             transition: width 0.3s ease;
         }
 
@@ -133,11 +133,10 @@
             width: 100%;
         }
 
-        /* Main Content */
+        /* Main Content - PÁGINA UNIFICADA */
         main {
             margin-top: 80px;
-            background: white;
-            border-radius: 20px 20px 0 0;
+            background: linear-gradient(80deg, #555555 0%, #5e0505 100%);
             min-height: calc(100vh - 80px);
             box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
         }
@@ -150,7 +149,7 @@
             color: white;
             text-align: center;
             padding: 6rem 0;
-            border-radius: 20px 20px 0 0;
+            border-radius: 0px 0px 80px 80px;
             overflow: hidden;
         }
 
@@ -161,7 +160,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.4); /* opacidade aqui! */
+            background-color: rgba(0, 0, 0, 0.4);
             z-index: 0;
         }
 
@@ -186,26 +185,25 @@
         .cta-button {
             display: inline-block;
             padding: 1rem 2rem;
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-            color: white;
+            background: linear-gradient(45deg, #a30b0b, #5e0505);
+            color: rgb(255, 255, 255);
             text-decoration: none;
             border-radius: 50px;
             font-weight: bold;
             font-size: 1.1rem;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(238, 90, 36, 0.3);
+            box-shadow: 0 8px 25px rgba(201, 33, 33, 0.3);
             animation: fadeInUp 1s ease-out 0.6s both;
         }
 
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(238, 90, 36, 0.4);
+            box-shadow: 0 12px 35px rgba(122, 6, 6, 0.4);
         }
 
-        /* About Section */
+        /* About Section - SEM FUNDO SEPARADO */
         .about {
-            padding: 4rem 0;
-            background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+            padding: 6rem 0;
         }
 
         .about-content {
@@ -218,13 +216,13 @@
         .about-text h2 {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            color: #333;
+            color: #ffffff;
         }
 
         .about-text p {
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             margin-bottom: 1.5rem;
-            color: #666;
+            color: #e0e0e0;
         }
 
         .about-stats {
@@ -234,39 +232,41 @@
         }
 
         .stat-item {
-            background: white;
+            background: rgba(184, 184, 184, 0.95);
             padding: 1.5rem;
             border-radius: 15px;
             text-align: center;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: transform 0.3s ease;
         }
 
         .stat-item:hover {
             transform: translateY(-5px);
+            background: rgba(184, 184, 184, 0.95);
         }
 
         .stat-number {
             font-size: 2rem;
             font-weight: bold;
-            color: #667eea;
+            color: rgba(184, 184, 184, 0.95);
         }
 
         .stat-label {
-            color: #666;
+            color: rgba(184, 184, 184, 0.95);
             margin-top: 0.5rem;
         }
 
-        /* Properties Section */
+        /* Properties Section - SEM FUNDO SEPARADO */
         .properties {
-            padding: 4rem 0;
+            padding: 6rem 0;
         }
 
         .section-title {
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 3rem;
-            color: #333;
+            color: #ffffff;
         }
 
         .properties-grid {
@@ -277,17 +277,19 @@
         }
 
         .property-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
             position: relative;
         }
 
         .property-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
         .property-image {
@@ -301,7 +303,7 @@
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(45deg, #a30b0b, #5e0505);
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 20px;
@@ -317,11 +319,11 @@
             font-size: 1.3rem;
             font-weight: bold;
             margin-bottom: 0.5rem;
-            color: #333;
+            color: #ffffff;
         }
 
         .property-location {
-            color: #666;
+            color: #e0e0e0;
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
@@ -338,14 +340,14 @@
             display: flex;
             align-items: center;
             gap: 0.3rem;
-            color: #666;
+            color: #e0e0e0;
             font-size: 0.9rem;
         }
 
         .whatsapp-btn {
             width: 100%;
             padding: 0.8rem;
-            background: linear-gradient(45deg, #25d366, #128c7e);
+            background: linear-gradient(45deg, #a30b0b, #5e0505);
             color: white;
             border: none;
             border-radius: 10px;
@@ -361,85 +363,116 @@
 
         .whatsapp-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 5px 15px rgba(163, 11, 11, 0.4);
         }
 
-        /* Add Property Form */
+        /* Add Property Form - SEM FUNDO SEPARADO */
         .add-property {
-            background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
-            padding: 3rem 0;
-            border-radius: 20px;
-            margin: 2rem 0;
-        }
+    padding: 6rem 0;
+}
 
-        .form-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
+.section-title {
+    color: #fff;
+    font-weight: bold;
+}
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+.form-container {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+}
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            color: #333;
-        }
+.form-label {
+    color: #fff;
+    font-weight: 600;
+}
 
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
+.form-control,
+.form-select {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 2px solid rgba(141, 16, 16, 0.3);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
 
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #667eea;
-        }
+.form-control::placeholder,
+textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
+.form-control:focus,
+.form-select:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #a30b0b;
+    box-shadow: none;
+    color: #fff;
+}
 
-        .submit-btn {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+.form-select option {
+    background: #680606;
+    color: #fff;
+}
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-        }
+.submit-btn {
+    padding: 1rem;
+    background: linear-gradient(45deg, #a30b0b, #5e0505);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
-        /* Contact Section */
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(163, 11, 11, 0.4);
+}
+
+
+        /* Contact Section - GRADIENTE DIFERENTE PARA FINALIZAR */
         .contact {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            background: url('foto.jpeg') no-repeat center center;
+            background-size: cover;
             color: white;
-            padding: 4rem 0;
             text-align: center;
+            padding: 6rem 0;
+            border-radius: 80px 80px 0 0;
+            overflow: hidden;
+        }
+
+        .contact::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* 50% de opacidade preta */
+  z-index: 1;
+}
+
+.contact > * {
+  position: relative;
+  z-index: 2; /* garante que o conteúdo fique acima da camada escura */
+}
+
+        .contact h2 {
+            color: #ffffff;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact p {
+            color: #e0e0e0;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
         }
 
         .contact-info {
@@ -454,11 +487,23 @@
             padding: 2rem;
             border-radius: 15px;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: transform 0.3s ease;
         }
 
         .contact-item:hover {
             transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .contact-item h3 {
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item p {
+            color: #e0e0e0;
+            font-size: 1rem;
         }
 
         .contact-icon {
@@ -471,7 +516,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: linear-gradient(45deg, #25d366, #128c7e);
+            background: linear-gradient(120deg, #947777, #5e0505 100%);
             color: white;
             width: 60px;
             height: 60px;
@@ -482,14 +527,14 @@
             text-decoration: none;
             font-size: 1.5rem;
             z-index: 1000;
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 5px 20px rgba(206, 22, 22, 0.4);
             transition: all 0.3s ease;
             animation: pulse 2s infinite;
         }
 
         .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+            transform: scale(1.2);
+            box-shadow: 0 8px 30px rgba(194, 22, 22, 0.5);
         }
 
         /* Animations */
@@ -506,13 +551,37 @@
 
         @keyframes pulse {
             0% {
-                box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+                box-shadow: 0 5px 20px rgb(255, 0, 0);
             }
             50% {
-                box-shadow: 0 5px 20px rgba(37, 211, 102, 0.6);
+                box-shadow: 0 5px 20px rgba(255, 8, 0, 0.6);
             }
             100% {
-                box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+                box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
+            }
+        }
+
+        /* Validação de formulário */
+        .form-group input.invalid,
+        .form-group select.invalid,
+        .form-group textarea.invalid {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+        }
+
+        .error-message {
+            animation: fadeInError 0.3s ease-out;
+            color: #ff6b6b;
+        }
+
+        @keyframes fadeInError {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
@@ -542,6 +611,12 @@
             .header-content {
                 flex-direction: column;
                 gap: 1rem;
+            }
+
+            .about,
+            .properties,
+            .add-property {
+                padding: 4rem 0;
             }
         }
 
@@ -593,84 +668,96 @@ Agende uma visita e conheça os nossos imóveis!</p>
             </div>
         </section>
 
-        <section id="imoveis" class="properties">
-            <div class="container">
-                <h2 class="section-title">Imóveis Disponíveis</h2>
-                <div class="properties-grid" id="properties-grid">
-                    <!-- Imóveis serão inseridos aqui via JavaScript -->
-                </div>
-            </div>
-        </section>
-
+        <!-- Adicione o link do Bootstrap no <head> do seu HTML -->
         <section id="adicionar" class="add-property">
-            <div class="container">
-                <h2 class="section-title">Adicionar Novo Imóvel</h2>
-                <div class="form-container">
-                    <form id="property-form">
-                        <div class="form-group">
-                            <label for="property-name">Nome do Imóvel</label>
-                            <input type="text" id="property-name" required>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="property-price">Preço (R$)</label>
-                                <input type="number" id="property-price" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="property-type">Tipo</label>
-                                <select id="property-type" required>
-                                    <option value="">Selecione</option>
-                                    <option value="casa">Casa</option>
-                                    <option value="apartamento">Apartamento</option>
-                                    <option value="terreno">Terreno</option>
-                                    <option value="comercial">Comercial</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="property-location">Localização</label>
-                            <input type="text" id="property-location" required>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="property-bedrooms">Quartos</label>
-                                <input type="number" id="property-bedrooms" min="0">
-                            </div>
-                            <div class="form-group">
-                                <label for="property-bathrooms">Banheiros</label>
-                                <input type="number" id="property-bathrooms" min="0">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="property-area">Área (m²)</label>
-                                <input type="number" id="property-area">
-                            </div>
-                            <div class="form-group">
-                                <label for="property-parking">Vagas Garagem</label>
-                                <input type="number" id="property-parking" min="0">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="property-image">URL da Imagem</label>
-                            <input type="url" id="property-image" placeholder="https://exemplo.com/imagem.jpg">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="property-description">Descrição</label>
-                            <textarea id="property-description" rows="4"></textarea>
-                        </div>
-
-                        <button type="submit" class="submit-btn">Adicionar Imóvel</button>
-                    </form>
+        <div class="container">
+            <h2 class="section-title text-center mb-4">Adicionar Novo Imóvel</h2>
+            <div class="form-container">
+            <form id="property-form" class="row g-3">
+                <div class="col-12">
+                <div class="form-group">
+                    <label for="property-name" class="form-label">Nome do Imóvel</label>
+                    <input type="text" class="form-control" id="property-name" required>
                 </div>
+                </div>
+
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="property-price" class="form-label">Preço (R$)</label>
+                    <input type="number" class="form-control" id="property-price" required>
+                </div>
+                </div>
+
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="property-type" class="form-label">Tipo</label>
+                    <select class="form-select" id="property-type" required>
+                    <option value="">Selecione</option>
+                    <option value="casa">Casa</option>
+                    <option value="apartamento">Apartamento</option>
+                    <option value="terreno">Terreno</option>
+                    <option value="comercial">Comercial</option>
+                    </select>
+                </div>
+                </div>
+
+                <div class="col-12">
+                <div class="form-group">
+                    <label for="property-location" class="form-label">Localização</label>
+                    <input type="text" class="form-control" id="property-location" required>
+                </div>
+                </div>
+
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="property-bedrooms" class="form-label">Quartos</label>
+                    <input type="number" class="form-control" id="property-bedrooms" min="0">
+                </div>
+                </div>
+
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="property-bathrooms" class="form-label">Banheiros</label>
+                    <input type="number" class="form-control" id="property-bathrooms" min="0">
+                </div>
+                </div>
+
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="property-area" class="form-label">Área (m²)</label>
+                    <input type="number" class="form-control" id="property-area">
+                </div>
+                </div>
+
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="property-parking" class="form-label">Vagas Garagem</label>
+                    <input type="number" class="form-control" id="property-parking" min="0">
+                </div>
+                </div>
+
+                <div class="col-12">
+                <div class="form-group">
+                    <label for="property-image" class="form-label">URL da Imagem</label>
+                    <input type="url" class="form-control" id="property-image" placeholder="https://exemplo.com/imagem.jpg">
+                </div>
+                </div>
+
+                <div class="col-12">
+                <div class="form-group">
+                    <label for="property-description" class="form-label">Descrição</label>
+                    <textarea class="form-control" id="property-description" rows="4"></textarea>
+                </div>
+                </div>
+
+                <div class="col-12">
+                <button type="submit" class="btn submit-btn w-100">Adicionar Imóvel</button>
+                </div>
+            </form>
             </div>
+        </div>
         </section>
+
 
         <section id="contato" class="contact">
             <div class="container">
@@ -703,6 +790,15 @@ Agende uma visita e conheça os nossos imóveis!</p>
                         <a href="https://www.youtube.com/@grupojfimoveis" target="_blank">
                             <i class="fab fa-youtube" style="font-size: 32px; color: #FF0000; margin-left: 10px;"></i>
                         </a>
+                        <a href="https://www.facebook.com/grupojfimoveis?_rdc=1&_rdr#" target="_blank">
+                            <i class="fa-brands fa-facebook" style="font-size: 32px; color: dodgerblue; margin-left: 10px;"></i>
+                        </a>
+                        <a href="https://x.com/grupojfimoveis" target="_blank">
+                            <i class="fa-brands fa-x-twitter" style="font-size: 32px; color: #000000; margin-left: 10px;"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@grupojfimoveis" target="_blank">
+                            <i class="fa-brands fa-tiktok" style="font-size: 32px; color: #000000; margin-left: 10px;"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -722,24 +818,24 @@ Agende uma visita e conheça os nossos imóveis!</p>
                 id: 1,
                 name: "Casa Moderna em Condomínio",
                 price: 850000,
-                location: "Alphaville, Barueri - SP",
+                location: "Anália Franco, São Paulo - SP",
                 bedrooms: 4,
                 bathrooms: 3,
                 area: 280,
                 parking: 2,
-                image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2075&q=80",
+                image: "test3.jpeg",
                 type: "casa"
             },
             {
                 id: 2,
                 name: "Apartamento Vista Mar",
                 price: 450000,
-                location: "Barra da Tijuca, Rio de Janeiro - RJ",
+                location: "Zona Sul, São Paulo - SP",
                 bedrooms: 3,
                 bathrooms: 2,
                 area: 120,
                 parking: 1,
-                image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                image: "test4.jpeg",
                 type: "apartamento"
             },
             {
@@ -751,7 +847,7 @@ Agende uma visita e conheça os nossos imóveis!</p>
                 bathrooms: 4,
                 area: 350,
                 parking: 3,
-                image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2053&q=80",
+                image: "test1.jpeg",
                 type: "apartamento"
             },
             {
@@ -763,7 +859,7 @@ Agende uma visita e conheça os nossos imóveis!</p>
                 bathrooms: 2,
                 area: 200,
                 parking: 2,
-                image: "https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                image: "test2.jpeg",
                 type: "casa"
             }
         ];
@@ -914,26 +1010,6 @@ Agende uma visita e conheça os nossos imóveis!</p>
                         observer.observe(card);
                     });
                 }, 100);
-            });
-        }
-
-        // Header scroll effect
-        function setupHeaderEffect() {
-            let lastScroll = 0;
-            const header = document.querySelector('header');
-            
-            window.addEventListener('scroll', () => {
-                const currentScroll = window.pageYOffset;
-                
-                if (currentScroll > 100) {
-                    header.style.background = 'rgba(255, 255, 255, 0.98)';
-                    header.style.backdropFilter = 'blur(15px)';
-                } else {
-                    header.style.background = 'rgba(255, 255, 255, 0.95)';
-                    header.style.backdropFilter = 'blur(10px)';
-                }
-                
-                lastScroll = currentScroll;
             });
         }
 
