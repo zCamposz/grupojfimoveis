@@ -1,3 +1,26 @@
+<?php
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
+    $usuario = $_POST["usuario"];
+    $senha = $_POST["senha"];
+
+    if ($usuario === "admin" && $senha === "jair1234") {
+        $_SESSION["logado"] = true;
+    } else {
+        $erroLogin = "Usuário ou senha inválidos!";
+    }
+}
+
+if (isset($_GET["logout"])) {
+    session_destroy();
+    header("Location: index.php");
+    exit;
+}
+
+$logado = isset($_SESSION["logado"]) && $_SESSION["logado"] === true;
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -681,7 +704,28 @@ Agende uma visita e conheça os nossos imóveis!</p>
             <div class="container">
                 <h2 class="section-title">Imóveis Disponíveis</h2>
                 <div class="properties-grid" id="properties-grid">
-                    <!-- Imóveis serão inseridos aqui via JavaScript -->
+                    <?php
+                    require 'conexao.php';
+                    $imoveis = $pdo->query("SELECT * FROM tbimoveis ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
+
+                    foreach ($imoveis as $p): ?>
+                        <div class="property-card">
+                        <div class="property-image" style="background-image: url('<?= $p['image'] ?>')">
+                            <div class="property-price">R$ <?= number_format($p['price'], 0, ',', '.') ?></div>
+                        </div>
+                        <div class="property-info">
+                            <h3 class="property-title"><?= $p['name'] ?></h3>
+                            <div class="property-location"><span>📍</span> <?= $p['location'] ?></div>
+                            <div class="property-features">
+                            <div class="feature">🛏️ <?= $p['bedrooms'] ?> quartos</div>
+                            <div class="feature">🚿 <?= $p['bathrooms'] ?> banheiros</div>
+                            <div class="feature">📐 <?= $p['area'] ?>m²</div>
+                            <div class="feature">🚗 <?= $p['parking'] ?> vagas</div>
+                            </div>
+                            <a href="https://wa.me/5511985001595?text=Olá! Vi o imóvel '<?= urlencode($p['name']) ?>'" class="whatsapp-btn" target="_blank">💬 Tenho Interesse</a>
+                        </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </section>
@@ -689,93 +733,101 @@ Agende uma visita e conheça os nossos imóveis!</p>
 
         <!-- Adicione o link do Bootstrap no <head> do seu HTML -->
         <section id="adicionar" class="add-property">
-        <div class="container">
-            <h2 class="section-title text-center mb-4">Adicionar Novo Imóvel</h2>
-            <div class="form-container">
-            <form id="property-form" class="row g-3">
-                <div class="col-12">
-                <div class="form-group">
-                    <label for="property-name" class="form-label">Nome do Imóvel</label>
-                    <input type="text" class="form-control" id="property-name" required>
-                </div>
-                </div>
+  <div class="container">
+    
 
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label for="property-price" class="form-label">Preço (R$)</label>
-                    <input type="number" class="form-control" id="property-price" required>
-                </div>
-                </div>
+    <h2 class="section-title text-center mb-4">Área Restrita</h2>
 
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label for="property-type" class="form-label">Tipo</label>
-                    <select class="form-select" id="property-type" required>
-                    <option value="">Selecione</option>
-                    <option value="casa">Casa</option>
-                    <option value="apartamento">Apartamento</option>
-                    <option value="terreno">Terreno</option>
-                    <option value="comercial">Comercial</option>
-                    </select>
-                </div>
-                </div>
-
-                <div class="col-12">
-                <div class="form-group">
-                    <label for="property-location" class="form-label">Localização</label>
-                    <input type="text" class="form-control" id="property-location" required>
-                </div>
-                </div>
-
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label for="property-bedrooms" class="form-label">Quartos</label>
-                    <input type="number" class="form-control" id="property-bedrooms" min="0">
-                </div>
-                </div>
-
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label for="property-bathrooms" class="form-label">Banheiros</label>
-                    <input type="number" class="form-control" id="property-bathrooms" min="0">
-                </div>
-                </div>
-
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label for="property-area" class="form-label">Área (m²)</label>
-                    <input type="number" class="form-control" id="property-area">
-                </div>
-                </div>
-
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label for="property-parking" class="form-label">Vagas Garagem</label>
-                    <input type="number" class="form-control" id="property-parking" min="0">
-                </div>
-                </div>
-
-                <div class="col-12">
-                <div class="form-group">
-                    <label for="property-image" class="form-label">URL da Imagem</label>
-                    <input type="url" class="form-control" id="property-image" placeholder="https://exemplo.com/imagem.jpg">
-                </div>
-                </div>
-
-                <div class="col-12">
-                <div class="form-group">
-                    <label for="property-description" class="form-label">Descrição</label>
-                    <textarea class="form-control" id="property-description" rows="4"></textarea>
-                </div>
-                </div>
-
-                <div class="col-12">
-                <button type="submit" class="btn submit-btn w-100">Adicionar Imóvel</button>
-                </div>
-            </form>
+    <div class="form-container">
+      <?php if (!$logado): ?>
+        <form method="POST" class="row g-3">
+          <div class="col-12">
+            <label for="usuario" class="form-label">Usuário</label>
+            <input type="text" name="usuario" id="usuario" class="form-control" required>
+          </div>
+          <div class="col-12">
+            <label for="senha" class="form-label">Senha</label>
+            <input type="password" name="senha" id="senha" class="form-control" required>
+          </div>
+          <?php if (isset($erroLogin)): ?>
+            <div class="col-12">
+              <p class="text-danger"><?= $erroLogin ?></p>
             </div>
+          <?php endif; ?>
+          <div class="col-12">
+            <button type="submit" name="login" class="btn submit-btn w-100">Entrar</button>
+          </div>
+        </form>
+      <?php else: ?>
+        <form action="salvar.php" id="property-form" class="row g-3" method="POST">
+          <div class="col-12">
+            <label for="property-name" class="form-label">Nome do Imóvel</label>
+            <input name="name" type="text" class="form-control" id="property-name" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="property-price" class="form-label">Preço (R$)</label>
+            <input name="price" type="number" class="form-control" id="property-price" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="property-type" class="form-label">Tipo</label>
+            <select name="type" class="form-select" id="property-type" required>
+              <option value="">Selecione</option>
+              <option value="casa">Casa</option>
+              <option value="apartamento">Apartamento</option>
+              <option value="terreno">Terreno</option>
+              <option value="comercial">Comercial</option>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <label for="property-location" class="form-label">Localização</label>
+            <input name="location" type="text" class="form-control" id="property-location" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="property-bedrooms" class="form-label">Quartos</label>
+            <input name="bedrooms" type="number" class="form-control" id="property-bedrooms" min="0">
+          </div>
+
+          <div class="col-md-6">
+            <label for="property-bathrooms" class="form-label">Banheiros</label>
+            <input name="bathrooms" type="number" class="form-control" id="property-bathrooms" min="0">
+          </div>
+
+          <div class="col-md-6">
+            <label for="property-area" class="form-label">Área (m²)</label>
+            <input name="area" type="number" class="form-control" id="property-area">
+          </div>
+
+          <div class="col-md-6">
+            <label for="property-parking" class="form-label">Vagas Garagem</label>
+            <input name="parking" type="number" class="form-control" id="property-parking" min="0">
+          </div>
+
+          <div class="col-12">
+            <label for="property-image" class="form-label">URL da Imagem</label>
+            <input name="image" type="url" class="form-control" id="property-image" placeholder="https://exemplo.com/imagem.jpg">
+          </div>
+
+          <div class="col-12">
+            <label for="property-description" class="form-label">Descrição</label>
+            <textarea class="form-control" id="property-description" rows="4"></textarea>
+          </div>
+
+          <div class="col-12">
+            <button type="submit" class="btn submit-btn w-100">Adicionar Imóvel</button>
+          </div>
+        </form>
+        <div class="text-end mt-3">
+          <a href="index.php?logout=1" class="btn btn-outline-secondary">Sair</a>
         </div>
-        </section>
+      <?php endif; ?>
+    </div>
+  </div>
+</section>
+
 
 
         <section id="contato" class="contact">
@@ -831,57 +883,6 @@ Agende uma visita e conheça os nossos imóveis!</p>
     </a>
 
     <script>
-        // Lista de imóveis (simulando dados)
-        let properties = [
-            {
-                id: 1,
-                name: "Casa Moderna em Condomínio",
-                price: 850000,
-                location: "Anália Franco, São Paulo - SP",
-                bedrooms: 4,
-                bathrooms: 3,
-                area: 280,
-                parking: 2,
-                image: "test3.jpeg",
-                type: "casa"
-            },
-            {
-                id: 2,
-                name: "Apartamento Vista Mar",
-                price: 450000,
-                location: "Zona Sul, São Paulo - SP",
-                bedrooms: 3,
-                bathrooms: 2,
-                area: 120,
-                parking: 1,
-                image: "test4.jpeg",
-                type: "apartamento"
-            },
-            {
-                id: 3,
-                name: "Cobertura Duplex Luxo",
-                price: 1200000,
-                location: "Jardins, São Paulo - SP",
-                bedrooms: 5,
-                bathrooms: 4,
-                area: 350,
-                parking: 3,
-                image: "test1.jpeg",
-                type: "apartamento"
-            },
-            {
-                id: 4,
-                name: "Casa de Campo com Piscina",
-                price: 680000,
-                location: "Campos do Jordão - SP",
-                bedrooms: 3,
-                bathrooms: 2,
-                area: 200,
-                parking: 2,
-                image: "test2.jpeg",
-                type: "casa"
-            }
-        ];
 
         // Função para formatar preço
         function formatPrice(price) {
@@ -899,53 +900,7 @@ Agende uma visita e conheça os nossos imóveis!</p>
         }
 
         // Função para renderizar imóveis
-        function renderProperties() {
-            const grid = document.getElementById('properties-grid');
-            grid.innerHTML = '';
-
-            properties.forEach(property => {
-                const propertyCard = document.createElement('div');
-                propertyCard.className = 'property-card';
-                propertyCard.innerHTML = `
-                    <div class="property-image" style="background-image: url('${property.image}')">
-                        <div class="property-price">${formatPrice(property.price)}</div>
-                    </div>
-                    <div class="property-info">
-                        <h3 class="property-title">${property.name}</h3>
-                        <div class="property-location">
-                            <span>📍</span>
-                            <span>${property.location}</span>
-                        </div>
-                        <div class="property-features">
-                            <div class="feature">
-                                <span>🛏️</span>
-                                <span>${property.bedrooms} quartos</span>
-                            </div>
-                            <div class="feature">
-                                <span>🚿</span>
-                                <span>${property.bathrooms} banheiros</span>
-                            </div>
-                            <div class="feature">
-                                <span>📐</span>
-                                <span>${property.area}m²</span>
-                            </div>
-                            <div class="feature">
-                                <span>🚗</span>
-                                <span>${property.parking} vagas</span>
-                            </div>
-                        </div>
-                        <a href="${generateWhatsAppLink(property.name)}" 
-                           class="whatsapp-btn" 
-                           target="_blank" 
-                           rel="noopener"
-                           onclick="fbq('track', 'Lead', {content_name: '${property.name}'});">
-                            💬 Tenho Interesse
-                        </a>
-                    </div>
-                `;
-                grid.appendChild(propertyCard);
-            });
-        }
+        
 
         // Função para adicionar novo imóvel
         function addProperty(event) {
