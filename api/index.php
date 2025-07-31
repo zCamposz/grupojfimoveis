@@ -167,7 +167,7 @@ $logado = isset($_SESSION["logado"]) && $_SESSION["logado"] === true;
         /* Hero Section */
         .hero {
             position: relative;
-            background: url('hero-bg.jpg.jpeg') no-repeat center center;
+            background: url('../public/hero-bg.jpeg') no-repeat center center;
             background-size: cover;
             color: white;
             text-align: center;
@@ -470,7 +470,7 @@ textarea::placeholder {
         /* Contact Section - GRADIENTE DIFERENTE PARA FINALIZAR */
         .contact {
             position: relative;
-            background: url('foto.jpeg') no-repeat center center;
+            background: url('../public/foto.jpeg') no-repeat center center;
             background-size: cover;
             color: white;
             text-align: center;
@@ -693,7 +693,7 @@ textarea::placeholder {
 Agende uma visita e conheça os nossos imóveis!</p>
                     </div>
                     <div class="about-stats">
-                        <img src="agent-photo.jpg.jpeg" alt="" width="500" height="700" class="round-image">">
+                        <img src="../public/agent-photo.jpeg" alt="" width="500" height="700" class="round-image">">
 
                     </div>
                 </div>
