@@ -116,7 +116,7 @@ $logado = isset($_SESSION["logado"]) && $_SESSION["logado"] === true;
         .logo {
             font-size: 2rem;
             font-weight: bold;
-            background: linear-gradient(45deg, #a30b0b, #5e0505);
+            background: linear-gradient(45deg, #000000ff, #000000ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -130,14 +130,14 @@ $logado = isset($_SESSION["logado"]) && $_SESSION["logado"] === true;
 
         nav a {
             text-decoration: none;
-            color: rgba(136, 34, 34, 0.95);
+            color: rgba(0, 0, 0, 0.95);
             font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
         }
 
         nav a:hover {
-            color: #6d1212;
+            color: #ff0000ff;
             transform: translateY(-2px);
         }
 
@@ -148,7 +148,7 @@ $logado = isset($_SESSION["logado"]) && $_SESSION["logado"] === true;
             height: 2px;
             bottom: -5px;
             left: 0;
-            background: linear-gradient(45deg, #a30b0b, #5e0505);
+            background: linear-gradient(45deg, #ff0000ff, #ffffffff);
             transition: width 0.3s ease;
         }
 
@@ -159,7 +159,7 @@ $logado = isset($_SESSION["logado"]) && $_SESSION["logado"] === true;
         /* Main Content - PÁGINA UNIFICADA */
         main {
             margin-top: 80px;
-            background: linear-gradient(80deg, #555555 0%, #5e0505 100%);
+            background: linear-gradient(135deg, #7e7e7eff 0%, #3d3d3dff 100%);
             min-height: calc(100vh - 80px);
             box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
         }
@@ -252,6 +252,32 @@ $logado = isset($_SESSION["logado"]) && $_SESSION["logado"] === true;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
+        }
+
+        .img-container {
+  width: 400px; /* Aumenta o tamanho da imagem */
+  height: 400px;
+  border-radius: 50%;
+  padding: 10px; /* Espaço para a borda */
+  background: linear-gradient(135deg, #a50d0dff, #c4a80dff); /* Gradiente mais vibrante */
+  box-shadow: 0 0 20px rgba(0,0,0,0.4); /* Sombra para destacar */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-container img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 15%; /* foca mais na parte superior da imagem */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
 
         .stat-item {
@@ -400,71 +426,71 @@ $logado = isset($_SESSION["logado"]) && $_SESSION["logado"] === true;
 
         /* Add Property Form - SEM FUNDO SEPARADO */
         .add-property {
-    padding: 6rem 0;
-}
+            padding: 6rem 0;
+        }
 
-.section-title {
-    color: #fff;
-    font-weight: bold;
-}
+        .section-title {
+            color: #fff;
+            font-weight: bold;
+        }
 
-.form-container {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
-}
+        .form-container {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+        }
 
-.form-label {
-    color: #fff;
-    font-weight: 600;
-}
+        .form-label {
+            color: #fff;
+            font-weight: 600;
+        }
 
-.form-control,
-.form-select {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    border: 2px solid rgba(141, 16, 16, 0.3);
-    border-radius: 10px;
-    transition: all 0.3s ease;
-}
+        .form-control,
+        .form-select {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 2px solid rgba(141, 16, 16, 0.3);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
 
-.form-control::placeholder,
-textarea::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-}
+        .form-control::placeholder,
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
 
-.form-control:focus,
-.form-select:focus {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: #a30b0b;
-    box-shadow: none;
-    color: #fff;
-}
+        .form-control:focus,
+        .form-select:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #a30b0b;
+            box-shadow: none;
+            color: #fff;
+        }
 
-.form-select option {
-    background: #680606;
-    color: #fff;
-}
+        .form-select option {
+            background: #680606;
+            color: #fff;
+        }
 
-.submit-btn {
-    padding: 1rem;
-    background: linear-gradient(45deg, #a30b0b, #5e0505);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
+        .submit-btn {
+            padding: 1rem;
+            background: linear-gradient(45deg, #a30b0b, #5e0505);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-.submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(163, 11, 11, 0.4);
-}
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(163, 11, 11, 0.4);
+        }
 
 
         /* Contact Section - GRADIENTE DIFERENTE PARA FINALIZAR */
@@ -480,20 +506,20 @@ textarea::placeholder {
         }
 
         .contact::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5); /* 50% de opacidade preta */
-  z-index: 1;
-}
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5); /* 50% de opacidade preta */
+            z-index: 1;
+        }
 
-.contact > * {
-  position: relative;
-  z-index: 2; /* garante que o conteúdo fique acima da camada escura */
-}
+        .contact > * {
+            position: relative;
+            z-index: 2; /* garante que o conteúdo fique acima da camada escura */
+        }
 
         .contact h2 {
             color: #ffffff;
@@ -548,7 +574,7 @@ textarea::placeholder {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: linear-gradient(120deg, #947777, #5e0505 100%);
+            background: linear-gradient(120deg, #990909ff, #5e0505 100%);
             color: white;
             width: 60px;
             height: 60px;
@@ -618,43 +644,472 @@ textarea::placeholder {
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
+       /* ===== RESPONSIVIDADE MOBILE ===== */
 
-            .about-content {
-                grid-template-columns: 1fr;
-            }
+/* Mobile First - Dispositivos até 480px */
+@media (max-width: 480px) {
+    /* Ajustes gerais */
+    body {
+        font-size: 14px;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
 
-            .properties-grid {
-                grid-template-columns: 1fr;
-            }
+    /* Header Mobile */
+    header {
+        padding: 0.5rem 0;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .logo {
+        font-size: 1.5rem;
+    }
+    
+    nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    nav a {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
 
-            .form-row {
-                grid-template-columns: 1fr;
-            }
+    /* Main ajuste */
+    main {
+        margin-top: 120px; /* Aumentado devido ao header em duas linhas */
+    }
 
-            nav ul {
-                flex-direction: column;
-                gap: 1rem;
-            }
+    /* Hero Section Mobile */
+    .hero {
+        padding: 3rem 0;
+        border-radius: 0px 0px 40px 40px;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        padding: 0 10px;
+    }
+    
+    .cta-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        display: block;
+        text-align: center;
+        margin: 0 20px;
+    }
 
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
+    /* About Section Mobile */
+    .about {
+        padding: 3rem 0;
+    }
+    
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .about-text h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+    
+    .about-text p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .img-container {
+        width: 250px;
+        height: 250px;
+        margin: 0 auto;
+    }
+    
+    .about-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    
+    .stat-item {
+        padding: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
 
-            .about,
-            .properties,
-            .add-property {
-                padding: 4rem 0;
-            }
-        }
+    /* Properties Section Mobile */
+    .properties {
+        padding: 3rem 0;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+    
+    .properties-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .property-card {
+        border-radius: 15px;
+        margin: 0 10px;
+    }
+    
+    .property-image {
+        height: 200px;
+    }
+    
+    .property-price {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.8rem;
+    }
+    
+    .property-info {
+        padding: 1rem;
+    }
+    
+    .property-title {
+        font-size: 1.1rem;
+    }
+    
+    .property-features {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .feature {
+        font-size: 0.8rem;
+        flex: 0 0 48%;
+    }
+    
+    .whatsapp-btn {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
 
-        .hidden {
-            display: none;
-        }
+    /* Add Property Form Mobile */
+    .add-property {
+        padding: 3rem 0;
+    }
+    
+    .form-container {
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin: 0 10px;
+    }
+    
+    .form-control,
+    .form-select {
+        font-size: 16px; /* Evita zoom no iOS */
+        padding: 0.8rem;
+    }
+    
+    .submit-btn {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    /* Contact Section Mobile */
+    .contact {
+        padding: 3rem 0;
+        border-radius: 40px 40px 0 0;
+    }
+    
+    .contact h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+    
+    .contact p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        padding: 0 10px;
+    }
+    
+    .contact-info {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin: 0 10px;
+    }
+    
+    .contact-item {
+        padding: 1.5rem;
+    }
+    
+    .contact-icon {
+        font-size: 2rem;
+    }
+    
+    .contact-item h3 {
+        font-size: 1.1rem;
+    }
+
+    /* WhatsApp Float Button Mobile */
+    .whatsapp-float {
+        width: 55px;
+        height: 55px;
+        bottom: 15px;
+        right: 15px;
+        font-size: 1.3rem;
+    }
+}
+
+/* Tablets Portrait - 481px a 768px */
+@media (min-width: 481px) and (max-width: 768px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    /* Header Tablet */
+    .header-content {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .logo {
+        font-size: 1.8rem;
+    }
+    
+    nav ul {
+        flex-direction: row;
+        gap: 1.5rem;
+    }
+
+    /* Hero Tablet */
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero p {
+        font-size: 1.2rem;
+    }
+
+    /* About Tablet */
+    .about-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2.5rem;
+    }
+    
+    .img-container {
+        width: 300px;
+        height: 300px;
+        margin: 0 auto;
+    }
+    
+    .about-stats {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    /* Properties Tablet */
+    .properties-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    /* Form Tablet */
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+
+/* Tablets Landscape - 769px a 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* About Landscape Tablet */
+    .about-content {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+    }
+    
+    .img-container {
+        width: 350px;
+        height: 350px;
+    }
+
+    /* Properties Landscape Tablet */
+    .properties-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Ajustes específicos para dispositivos muito pequenos */
+@media (max-width: 320px) {
+    .hero h1 {
+        font-size: 1.7rem;
+    }
+    
+    .hero p {
+        font-size: 0.9rem;
+    }
+    
+    .cta-button {
+        font-size: 0.9rem;
+        padding: 0.7rem 1.2rem;
+        margin: 0 10px;
+    }
+    
+    .about-text h2,
+    .section-title,
+    .contact h2 {
+        font-size: 1.6rem;
+    }
+    
+    .property-features {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+    
+    .feature {
+        flex: none;
+        font-size: 0.75rem;
+    }
+    
+    .about-stats {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+}
+
+/* Ajustes para orientação landscape em mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        padding: 2rem 0;
+    }
+    
+    .hero h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .hero p {
+        margin-bottom: 1rem;
+    }
+    
+    .about,
+    .properties,
+    .add-property,
+    .contact {
+        padding: 2rem 0;
+    }
+}
+
+/* Melhorias para touch targets */
+@media (max-width: 768px) {
+    /* Botões maiores para toque */
+    .whatsapp-btn,
+    .cta-button,
+    .submit-btn {
+        min-height: 44px; /* Recomendação Apple */
+        touch-action: manipulation;
+    }
+    
+    /* Links de navegação maiores */
+    nav a {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem 1rem;
+    }
+    
+    /* Campos de formulário otimizados */
+    .form-control,
+    .form-select {
+        min-height: 44px;
+        border-radius: 8px;
+    }
+    
+    /* Ícones de redes sociais maiores */
+    .contact-item a i {
+        font-size: 36px !important;
+        margin: 5px !important;
+    }
+}
+
+/* Ajustes para evitar overflow horizontal */
+@media (max-width: 768px) {
+    * {
+        max-width: 100%;
+        word-wrap: break-word;
+    }
+    
+    .property-card,
+    .contact-item,
+    .stat-item,
+    .form-container {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* Imagens responsivas */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Texto não quebra layout */
+    .property-title,
+    .contact-item h3,
+    .about-text h2 {
+        word-break: break-word;
+        hyphens: auto;
+    }
+}
+
+/* Animações otimizadas para mobile */
+@media (max-width: 768px) {
+    /* Reduz animações em dispositivos com menos performance */
+    .property-card:hover,
+    .stat-item:hover,
+    .contact-item:hover {
+        transform: translateY(-2px); /* Menos movimento */
+    }
+    
+    /* Remove algumas animações complexas em mobile */
+    .whatsapp-float {
+        animation: none;
+    }
+    
+    /* Transições mais rápidas */
+    * {
+        transition-duration: 0.2s !important;
+    }
+}
+
+/* Dark mode considerations para mobile */
+@media (max-width: 768px) and (prefers-color-scheme: dark) {
+    .form-control,
+    .form-select {
+        color-scheme: dark;
+    }
+}
+
+
     </style>
 </head>
 <body>
@@ -692,8 +1147,8 @@ textarea::placeholder {
                         <p>O Grupo JF Imoveis é uma empresa especialista em negócios imobiliários com imóveis de alto padrão e temos as melhores opções em localizações privilegiadas e bairros fascinantes em toda a cidade de São Paulo.  
 Agende uma visita e conheça os nossos imóveis!</p>
                     </div>
-                    <div class="about-stats">
-                        <img src="../public/agent-photo.jpeg" alt="" width="500" height="700" class="round-image">">
+                    <div class="img-container">
+                        <img src="../public/agent-photo.jpeg">
 
                     </div>
                 </div>
@@ -722,7 +1177,7 @@ Agende uma visita e conheça os nossos imóveis!</p>
                             <div class="feature">📐 <?= $p['area'] ?>m²</div>
                             <div class="feature">🚗 <?= $p['parking'] ?> vagas</div>
                             </div>
-                            <a href="https://wa.me/5511985001595?text=Olá! Vi o imóvel '<?= urlencode($p['name']) ?>'" class="whatsapp-btn" target="_blank">💬 Tenho Interesse</a>
+                            <a href="https://wa.me/5511985001595?text=Olá! Vi o imóvel '<?= urlencode($p['name']) ?>'" class="whatsapp-btn" target="_blank"><i class="fa-brands fa-whatsapp"></i> Tenho Interesse</a>
                         </div>
                         </div>
                     <?php endforeach; ?>
@@ -878,7 +1333,7 @@ Agende uma visita e conheça os nossos imóveis!</p>
     <!-- WhatsApp Float Button -->
     <a href="https://wa.me/5511985001595?text=Olá, vi um imóvel no site e gostaria de mais informações." 
        class="whatsapp-float" target="_blank" rel="noopener">
-        💬
+        <i class="fa-brands fa-whatsapp"></i>
     </a>
 
     <script>
