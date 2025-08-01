@@ -710,7 +710,7 @@ Agende uma visita e conheça os nossos imóveis!</p>
 
                     foreach ($imoveis as $p): ?>
                         <div class="property-card">
-                        <div class="property-image" style="background-image: url('<?= $p['image'] ?>')">
+                        <div class="property-image" style="background-image: url('../fotos/<?= $p['image'] ?>')">
                             <div class="property-price">R$ <?= number_format($p['price'], 0, ',', '.') ?></div>
                         </div>
                         <div class="property-info">
@@ -731,7 +731,6 @@ Agende uma visita e conheça os nossos imóveis!</p>
         </section>
 
 
-        <!-- Adicione o link do Bootstrap no <head> do seu HTML -->
         <section id="adicionar" class="add-property">
   <div class="container">
     
@@ -759,7 +758,7 @@ Agende uma visita e conheça os nossos imóveis!</p>
           </div>
         </form>
       <?php else: ?>
-        <form action="salvar.php" id="property-form" class="row g-3" method="POST">
+        <form action="salvar.php" id="property-form" class="row g-3" method="POST" enctype="multipart/form-data">
           <div class="col-12">
             <label for="property-name" class="form-label">Nome do Imóvel</label>
             <input name="name" type="text" class="form-control" id="property-name" required>
@@ -805,10 +804,10 @@ Agende uma visita e conheça os nossos imóveis!</p>
             <label for="property-parking" class="form-label">Vagas Garagem</label>
             <input name="parking" type="number" class="form-control" id="property-parking" min="0">
           </div>
-
+        
           <div class="col-12">
             <label for="property-image" class="form-label">URL da Imagem</label>
-            <input name="image" type="url" class="form-control" id="property-image" placeholder="https://exemplo.com/imagem.jpg">
+            <input name="image" type="file" class="form-control" id="property-image">
           </div>
 
           <div class="col-12">

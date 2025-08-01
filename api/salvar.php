@@ -8,7 +8,9 @@ $bedrooms = $_POST['bedrooms'];
 $bathrooms = $_POST['bathrooms'];
 $area = $_POST['area'];
 $parking = $_POST['parking'];
-$image = $_POST['image'];
+$image = $_FILES['image']['name'];
+$localImage = $_FILES['image']['tmp_name'];
+move_uploaded_file($localImage,"../fotos/$image");
 $type = $_POST['type'];
 
 $sql = "INSERT INTO tbimoveis (name, price, location, bedrooms, bathrooms, area, parking, image, type)
