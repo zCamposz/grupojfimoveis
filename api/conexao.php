@@ -1,12 +1,15 @@
 <?php
-$host = 'localhost';
-$dbname = 'dbimoveis';
-$user = 'root';
-$pass = '';
+$host = "aws-0-sa-east-1.pooler.supabase.com";
+$port = "6543";
+$dbname = "postgres";
+$user = "postgres.iavurvzpfgpihsfadmmx";
+$password = "grupojfimoveis/";
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
-} catch (PDOException $e) {
-    die("Erro na conexão com o banco de dados: " . $e->getMessage());
+$conn = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");
+
+if (!$conn) {
+    echo "Erro na conexão.";
+} else {
+    echo "Conexão bem-sucedida!";
 }
 ?>
