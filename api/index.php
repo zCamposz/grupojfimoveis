@@ -1271,7 +1271,7 @@ $logado = isset($_SESSION["logado"]) && $_SESSION["logado"] === true;
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <img src="/imagem.png" style="height:55px; vertical-align: middle; margin-right:10px;"> Grupo JF Imoveis
+                    <img src="../public/imagem.png" style="height:55px; vertical-align: middle; margin-right:10px;"> Grupo JF Imoveis
                 </div>
                 <nav>
                     <ul>
