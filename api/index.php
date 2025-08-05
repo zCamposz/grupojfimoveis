@@ -1270,7 +1270,9 @@ $logado = isset($_SESSION["logado"]) && $_SESSION["logado"] === true;
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="logo">🏠 Grupo JF Imoveis</div>
+                <div class="logo">
+                    <img src="../imagem.png" style="height:55px; vertical-align: middle; margin-right:10px;"> Grupo JF Imoveis
+                </div>
                 <nav>
                     <ul>
                         <li><a href="#inicio">Início</a></li>
@@ -1460,6 +1462,7 @@ Agende uma visita e conheça os nossos imóveis!</p>
                         <p>Jardim Anália Franco - SP</p>
                     </div>
                 </div>
+                
                 <div class="contact-info">
                     <div class="contact-item">
                         <h3>Encontre-nos</h3>
