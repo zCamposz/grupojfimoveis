@@ -1869,38 +1869,39 @@ Agende uma visita e conheça os nossos imóveis!</p>
 
 
         // Configuração Google Sheets
-// Substitua o código JavaScript existente no seu HTML
-
-// Remova estas linhas antigas:
-// const SHEET_ID = '1Xq8suuHEH3j2KVDeCRJQ-Sd5jQDn2P_fzI82ntUjAJU';
-// const API_KEY = 'AIzaSyBTL4Da-8TZGr2KGyGlAwjwu4QQf4BIBOY'; 
-// const RANGE = 'imoveis!A:J';
+const SHEET_ID = '1Xq8suuHEH3j2KVDeCRJQ-Sd5jQDn2P_fzI82ntUjAJU';
+const API_KEY = 'AIzaSyBTL4Da-8TZGr2KGyGlAwjwu4QQf4BIBOY'; 
+const RANGE = 'imoveis!A:J';
 
 let currentSheetsSlide = 0;
 let sheetsProperties = [];
 
-// Função atualizada para buscar dados via API route
+// Função para buscar dados da planilha
 async function loadSheetsProperties() {
     try {
-        // Use a rota da API ao invés de chamar diretamente o Google Sheets
-        const response = await fetch('/api/sheets', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-        
-        if (!response.ok) {
-            throw new Error(`Erro HTTP: ${response.status}`);
-        }
-        
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`;
+        const response = await fetch(url);
         const data = await response.json();
         
-        if (!data.success || !data.properties || data.properties.length === 0) {
-            throw new Error('Nenhum dado encontrado');
+        if (!data.values || data.values.length <= 1) {
+            throw new Error('Nenhum dados encontrado na planilha');
         }
 
-        sheetsProperties = data.properties;
+        const headers = data.values[0];
+        const rows = data.values.slice(1);
+        
+        sheetsProperties = rows.map(row => ({
+            id: row[0] || '',
+            name: row[1] || 'Sem nome',
+            price: row[2] || '0',
+            location: row[3] || 'Localização não informada',
+            bedrooms: row[4] || '0',
+            bathrooms: row[5] || '0',
+            area: row[6] || '0',
+            parking: row[7] || '0',
+            image: row[8] || 'https://via.placeholder.com/800x400?text=Sem+Imagem',
+            type: row[9] || 'Imóvel'
+        }));
 
         renderSheetsCarousel();
         document.getElementById('sheets-loading').style.display = 'none';
@@ -1913,72 +1914,14 @@ async function loadSheetsProperties() {
     } catch (error) {
         console.error('Erro ao carregar dados:', error);
         document.getElementById('sheets-loading').style.display = 'none';
-        
-        // Mostrar erro mais detalhado
-        const errorDiv = document.getElementById('sheets-error');
-        errorDiv.innerHTML = `
-            <h3>Erro ao carregar imóveis em destaque</h3>
-            <p>Detalhes: ${error.message}</p>
-            <p>Verifique o console para mais informações.</p>
-        `;
-        errorDiv.style.display = 'block';
+        document.getElementById('sheets-error').style.display = 'block';
     }
 }
 
-// Função alternativa com fallback para dados estáticos
-async function loadSheetsPropertiesWithFallback() {
-    try {
-        await loadSheetsProperties();
-    } catch (error) {
-        console.warn('Falha ao carregar da API, usando dados de exemplo:', error);
-        
-        // Dados de fallback
-        sheetsProperties = [
-            {
-                id: 'exemplo1',
-                name: 'Apartamento de Luxo',
-                price: '1200000',
-                location: 'Vila Madalena, São Paulo',
-                bedrooms: '3',
-                bathrooms: '2',
-                area: '120',
-                parking: '2',
-                image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                type: 'Apartamento'
-            },
-            {
-                id: 'exemplo2',
-                name: 'Casa Moderna',
-                price: '850000',
-                location: 'Jardins, São Paulo',
-                bedrooms: '4',
-                bathrooms: '3',
-                area: '200',
-                parking: '3',
-                image: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                type: 'Casa'
-            }
-        ];
-
-        renderSheetsCarousel();
-        document.getElementById('sheets-loading').style.display = 'none';
-        document.getElementById('sheets-carousel-container').style.display = 'block';
-        
-        if (sheetsProperties.length > 1) {
-            startSheetsAutoPlay();
-        }
-    }
-}
-
-// Resto das funções permanecem iguais...
+// Função para renderizar o carrossel
 function renderSheetsCarousel() {
     const track = document.getElementById('sheets-carousel-track');
     const indicators = document.getElementById('sheets-indicators');
-    
-    if (!track || !indicators) {
-        console.error('Elementos do carrossel não encontrados');
-        return;
-    }
     
     track.innerHTML = '';
     indicators.innerHTML = '';
@@ -2058,8 +2001,6 @@ function updateSheetsCarousel() {
     const track = document.getElementById('sheets-carousel-track');
     const indicators = document.querySelectorAll('.sheets-indicator');
     
-    if (!track) return;
-    
     track.style.transform = `translateX(-${currentSheetsSlide * 100}%)`;
     
     indicators.forEach((indicator, index) => {
@@ -2076,10 +2017,9 @@ function startSheetsAutoPlay() {
     }, 5000);
 }
 
-// Atualizar o carregamento quando a página carregar
+// Carregar quando a página carregar
 document.addEventListener('DOMContentLoaded', () => {
-    // Use a versão com fallback para maior confiabilidade
-    loadSheetsPropertiesWithFallback();
+    loadSheetsProperties();
 });
 
     </script>
