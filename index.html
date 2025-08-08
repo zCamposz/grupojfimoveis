@@ -1825,19 +1825,7 @@ Agende uma visita e conheça os nossos imóveis!</p>
             });
         });
 
-        // PWA Service Worker (opcional)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(function(registration) {
-                        console.log('SW registered: ', registration);
-                    })
-                    .catch(function(registrationError) {
-                        console.log('SW registration failed: ', registrationError);
-                    });
-            });
-        }
-
+       
         // Adicionar estilos CSS para validação
         const validationStyles = `
             .form-group input.invalid,
