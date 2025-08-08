@@ -1857,158 +1857,286 @@ Agende uma visita e conheça os nossos imóveis!</p>
 
 
         // Configuração Google Sheets
+// Configuração Google Sheets
 const SHEET_ID = '1Xq8suuHEH3j2KVDeCRJQ-Sd5jQDn2P_fzI82ntUjAJU';
 const API_KEY = 'AIzaSyBTL4Da-8TZGr2KGyGlAwjwu4QQf4BIBOY'; 
 const RANGE = 'imoveis!A:J';
 
 let currentSheetsSlide = 0;
 let sheetsProperties = [];
+let sheetsAutoPlay = null;
 
-// Função para buscar dados da planilha
+// FUNÇÃO 1 - REESCRITA: Carregar propriedades do Google Sheets
 async function loadSheetsProperties() {
+    const loadingEl = document.getElementById('sheets-loading');
+    const containerEl = document.getElementById('sheets-carousel-container');
+    const errorEl = document.getElementById('sheets-error');
+    
     try {
-        const url = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`)}`;        
-        const response = await fetch(url);
-        const result = await response.json();
-        const data = JSON.parse(result.contents);
+        loadingEl.innerHTML = 'Conectando com Google Sheets...';
         
-        if (!data.values || data.values.length <= 1) {
-            throw new Error('Nenhum dados encontrado na planilha');
+        // Múltiplas tentativas de acesso
+        let response;
+        let data;
+        
+        // Tentativa 1: API do Google Sheets
+        try {
+            const apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`;
+            response = await fetch(apiUrl);
+            
+            if (response.ok) {
+                const result = await response.json();
+                data = result.values;
+            }
+        } catch (apiError) {
+            console.log('API falhou, tentando método alternativo...');
         }
-
-        const headers = data.values[0];
-        const rows = data.values.slice(1);
         
-        sheetsProperties = rows.map(row => ({
-            id: row[0] || '',
-            name: row[1] || 'Sem nome',
-            price: row[2] || '0',
-            location: row[3] || 'Localização não informada',
-            bedrooms: row[4] || '0',
-            bathrooms: row[5] || '0',
-            area: row[6] || '0',
-            parking: row[7] || '0',
-            image: row[8] || 'https://via.placeholder.com/800x400?text=Sem+Imagem',
-            type: row[9] || 'Imóvel'
-        }));
-
+        // Tentativa 2: Export CSV se API falhar
+        if (!data) {
+            const csvUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
+            response = await fetch(csvUrl);
+            
+            if (response.ok) {
+                const csvText = await response.text();
+                data = csvText.split('\n').map(row => 
+                    row.split(',').map(cell => cell.replace(/"/g, '').trim())
+                ).filter(row => row.some(cell => cell));
+            }
+        }
+        
+        if (!data || data.length <= 1) {
+            throw new Error('Planilha vazia ou inacessível');
+        }
+        
+        // Processar dados (pula header)
+        const headers = data[0];
+        sheetsProperties = data.slice(1)
+            .filter(row => row.length > 1 && row[1]) // Nome obrigatório
+            .map((row, index) => ({
+                id: row[0] || `sheet-${index + 1}`,
+                name: row[1] || 'Imóvel sem nome',
+                price: parseFloat(row[2]?.replace(/[^\d,]/g, '').replace(',', '.')) || 0,
+                location: row[3] || 'Localização não informada',
+                bedrooms: parseInt(row[4]) || 0,
+                bathrooms: parseInt(row[5]) || 0,
+                area: parseInt(row[6]) || 0,
+                parking: parseInt(row[7]) || 0,
+                image: row[8] && row[8].startsWith('http') ? row[8] : 
+                       'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                type: row[9] || 'Imóvel'
+            }));
+        
+        if (sheetsProperties.length === 0) {
+            throw new Error('Nenhum imóvel válido encontrado');
+        }
+        
+        // Sucesso - renderizar
+        loadingEl.style.display = 'none';
+        errorEl.style.display = 'none';
+        containerEl.style.display = 'block';
+        
         renderSheetsCarousel();
-        document.getElementById('sheets-loading').style.display = 'none';
-        document.getElementById('sheets-carousel-container').style.display = 'block';
         
         if (sheetsProperties.length > 1) {
             startSheetsAutoPlay();
         }
         
     } catch (error) {
-    console.error('Erro ao carregar dados:', error);
-    console.error('Verifique: 1) API Key válida, 2) Planilha pública, 3) Sheet ID correto');
-    document.getElementById('sheets-loading').innerHTML = 'Erro: Verifique a configuração da planilha';
+        console.error('Erro ao carregar planilha:', error);
+        
+        // Mostrar erro
+        loadingEl.style.display = 'none';
+        containerEl.style.display = 'none';
+        errorEl.style.display = 'block';
+        errorEl.innerHTML = `
+            <h3>⚠️ Erro ao carregar imóveis</h3>
+            <p>${error.message}</p>
+            <button onclick="loadSheetsProperties()" style="
+                background: #8B0000; 
+                color: white; 
+                border: none; 
+                padding: 10px 20px; 
+                border-radius: 5px; 
+                cursor: pointer;
+                margin-top: 10px;
+            ">Tentar Novamente</button>
+        `;
+    }
 }
-// Função para renderizar o carrossel
+
+// FUNÇÃO 2 - REESCRITA: Renderizar carrossel com dados da planilha
 function renderSheetsCarousel() {
     const track = document.getElementById('sheets-carousel-track');
     const indicators = document.getElementById('sheets-indicators');
     
+    if (!track || !indicators) return;
+    
+    // Limpar conteúdo anterior
     track.innerHTML = '';
     indicators.innerHTML = '';
-
+    
+    // Renderizar slides
     sheetsProperties.forEach((property, index) => {
-        // Criar card do imóvel
-        const card = document.createElement('div');
-        card.className = 'sheets-property-card';
-        card.innerHTML = `
-            <img src="${property.image}" alt="${property.name}" class="sheets-property-image" onerror="this.src='https://via.placeholder.com/800x400?text=Imagem+Indisponível'">
+        // Card do imóvel
+        const slide = document.createElement('div');
+        slide.className = 'sheets-property-card';
+        slide.innerHTML = `
+            <img src="${property.image}" 
+                 alt="${property.name}" 
+                 class="sheets-property-image"
+                 onerror="this.src='https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+            
             <div class="sheets-property-content">
-                <div class="sheets-property-type">${property.type}</div>
                 <div class="sheets-property-header">
                     <div>
                         <h3 class="sheets-property-name">${property.name}</h3>
-                        <div class="sheets-property-location">📍 ${property.location}</div>
+                        <div class="sheets-property-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            ${property.location}
+                        </div>
                     </div>
-                    <div class="sheets-property-price">R$ ${formatSheetsPrice(property.price)}</div>
+                    <div class="sheets-property-price">
+                        ${formatPrice(property.price)}
+                    </div>
                 </div>
+                
+                <div class="sheets-property-type">${property.type}</div>
+                
                 <div class="sheets-property-details">
                     <div class="sheets-detail-item">
                         <div class="sheets-detail-label">Quartos</div>
-                        <div class="sheets-detail-value">${property.bedrooms}</div>
+                        <div class="sheets-detail-value">
+                            <i class="fas fa-bed"></i> ${property.bedrooms}
+                        </div>
                     </div>
                     <div class="sheets-detail-item">
                         <div class="sheets-detail-label">Banheiros</div>
-                        <div class="sheets-detail-value">${property.bathrooms}</div>
+                        <div class="sheets-detail-value">
+                            <i class="fas fa-bath"></i> ${property.bathrooms}
+                        </div>
                     </div>
                     <div class="sheets-detail-item">
                         <div class="sheets-detail-label">Área</div>
-                        <div class="sheets-detail-value">${property.area}m²</div>
+                        <div class="sheets-detail-value">
+                            <i class="fas fa-ruler-combined"></i> ${property.area}m²
+                        </div>
                     </div>
                     <div class="sheets-detail-item">
                         <div class="sheets-detail-label">Vagas</div>
-                        <div class="sheets-detail-value">${property.parking}</div>
+                        <div class="sheets-detail-value">
+                            <i class="fas fa-car"></i> ${property.parking}
+                        </div>
                     </div>
                 </div>
-                <a href="https://wa.me/5511985001595?text=Olá! Vi o imóvel '${encodeURIComponent(property.name)}'" class="whatsapp-btn" target="_blank">
-                    <i class="fa-brands fa-whatsapp"></i> Tenho Interesse
+                
+                <a href="${generateWhatsAppLink(property.name)}" 
+                   target="_blank" 
+                   class="whatsapp-btn"
+                   onclick="trackPropertyInterest('${property.name}')">
+                    <i class="fab fa-whatsapp"></i>
+                    Tenho Interesse
                 </a>
             </div>
         `;
-        track.appendChild(card);
-
-        // Criar indicador
+        
+        track.appendChild(slide);
+        
+        // Indicador
         const indicator = document.createElement('div');
         indicator.className = `sheets-indicator ${index === 0 ? 'active' : ''}`;
         indicator.onclick = () => goToSheetsSlide(index);
         indicators.appendChild(indicator);
     });
-}
-
-// Função para formatar preço
-function formatSheetsPrice(price) {
-    const numPrice = parseFloat(price.toString().replace(/[^\d,.-]/g, '').replace(',', '.'));
-    if (isNaN(numPrice)) return price;
-    return numPrice.toLocaleString('pt-BR');
-}
-
-// Funções de navegação do carrossel
-function nextSheetsSlide() {
-    currentSheetsSlide = (currentSheetsSlide + 1) % sheetsProperties.length;
+    
+    // Posicionar no primeiro slide
+    currentSheetsSlide = 0;
     updateSheetsCarousel();
+}
+
+// Funções auxiliares para o carrossel
+function nextSheetsSlide() {
+    if (currentSheetsSlide < sheetsProperties.length - 1) {
+        currentSheetsSlide++;
+    } else {
+        currentSheetsSlide = 0;
+    }
+    updateSheetsCarousel();
+    resetSheetsAutoPlay();
 }
 
 function prevSheetsSlide() {
-    currentSheetsSlide = (currentSheetsSlide - 1 + sheetsProperties.length) % sheetsProperties.length;
+    if (currentSheetsSlide > 0) {
+        currentSheetsSlide--;
+    } else {
+        currentSheetsSlide = sheetsProperties.length - 1;
+    }
     updateSheetsCarousel();
+    resetSheetsAutoPlay();
 }
 
 function goToSheetsSlide(index) {
     currentSheetsSlide = index;
     updateSheetsCarousel();
+    resetSheetsAutoPlay();
 }
 
 function updateSheetsCarousel() {
     const track = document.getElementById('sheets-carousel-track');
     const indicators = document.querySelectorAll('.sheets-indicator');
     
-    track.style.transform = `translateX(-${currentSheetsSlide * 100}%)`;
+    if (track) {
+        track.style.transform = `translateX(-${currentSheetsSlide * 100}%)`;
+    }
     
     indicators.forEach((indicator, index) => {
         indicator.classList.toggle('active', index === currentSheetsSlide);
     });
 }
 
-// Auto-play do carrossel
 function startSheetsAutoPlay() {
-    setInterval(() => {
-        if (sheetsProperties.length > 1) {
-            nextSheetsSlide();
-        }
-    }, 5000);
+    sheetsAutoPlay = setInterval(nextSheetsSlide, 5000);
 }
 
-// Carregar quando a página carregar
-document.addEventListener('DOMContentLoaded', () => {
-    loadSheetsProperties();
-});
+function resetSheetsAutoPlay() {
+    if (sheetsAutoPlay) {
+        clearInterval(sheetsAutoPlay);
+        startSheetsAutoPlay();
+    }
 }
+
+function trackPropertyInterest(propertyName) {
+    // Analytics tracking
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateContact', {
+            content_name: propertyName,
+            content_category: 'real_estate'
+        });
+    }
+    
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'property_interest', {
+            'event_category': 'engagement',
+            'event_label': propertyName
+        });
+    }
+}
+
+// Inicializar quando a página carregar
+document.addEventListener('DOMContentLoaded', function() {
+    // Carregar imóveis da planilha
+    loadSheetsProperties();
+    
+    // Pausar autoplay quando hover no carrossel
+    const carousel = document.getElementById('sheets-carousel-container');
+    if (carousel) {
+        carousel.addEventListener('mouseenter', () => {
+            if (sheetsAutoPlay) clearInterval(sheetsAutoPlay);
+        });
+        
+        carousel.addEventListener('mouseleave', startSheetsAutoPlay);
+    }
+});
 
     </script>
 </body>
