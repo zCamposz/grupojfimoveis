@@ -1867,9 +1867,10 @@ let sheetsProperties = [];
 // Função para buscar dados da planilha
 async function loadSheetsProperties() {
     try {
-        const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`;
+        const url = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`)}`;        
         const response = await fetch(url);
-        const data = await response.json();
+        const result = await response.json();
+        const data = JSON.parse(result.contents);
         
         if (!data.values || data.values.length <= 1) {
             throw new Error('Nenhum dados encontrado na planilha');
@@ -1900,12 +1901,10 @@ async function loadSheetsProperties() {
         }
         
     } catch (error) {
-        console.error('Erro ao carregar dados:', error);
-        document.getElementById('sheets-loading').style.display = 'none';
-        document.getElementById('sheets-error').style.display = 'block';
-    }
+    console.error('Erro ao carregar dados:', error);
+    console.error('Verifique: 1) API Key válida, 2) Planilha pública, 3) Sheet ID correto');
+    document.getElementById('sheets-loading').innerHTML = 'Erro: Verifique a configuração da planilha';
 }
-
 // Função para renderizar o carrossel
 function renderSheetsCarousel() {
     const track = document.getElementById('sheets-carousel-track');
@@ -2009,6 +2008,7 @@ function startSheetsAutoPlay() {
 document.addEventListener('DOMContentLoaded', () => {
     loadSheetsProperties();
 });
+}
 
     </script>
 </body>
