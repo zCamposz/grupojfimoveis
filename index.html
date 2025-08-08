@@ -144,7 +144,7 @@
         /* Hero Section */
         .hero {
             position: relative;
-            background: url('../public/hero-bg.jpeg') no-repeat center center;
+            background: url('public/hero-bg.jpeg') no-repeat center center;
             background-size: cover;
             color: white;
             text-align: center;
@@ -473,7 +473,7 @@
         /* Contact Section - GRADIENTE DIFERENTE PARA FINALIZAR */
         .contact {
             position: relative;
-            background: url('../public/foto.jpeg') no-repeat center center;
+            background: url('public/foto.jpeg') no-repeat center center;
             background-size: cover;
             color: white;
             text-align: center;
@@ -933,7 +933,7 @@
     /* HERO - Proporções melhores */
     .hero {
         position: relative;
-        background: url('../public/hero-bg.jpeg') no-repeat center center;
+        background: url('public/hero-bg.jpeg') no-repeat center center;
         background-size: cover;
         color: white;
         text-align: center;
@@ -1242,7 +1242,7 @@
     /* CONTACT - Com imagem de fundo restaurada */
     .contact {
         position: relative;
-        background: url('../public/foto.jpeg') no-repeat center center;
+        background: url('public/foto.jpeg') no-repeat center center;
         background-size: cover;
         background-attachment: scroll; /* Para mobile */
         color: white;
@@ -1445,7 +1445,7 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <img src="../public/imagem.png" style="height:55px; vertical-align: middle; margin-right:10px;"> Grupo JF Imoveis
+                    <img src="public/imagem.png" style="height:55px; vertical-align: middle; margin-right:10px;"> Grupo JF Imoveis
                 </div>
                 <nav>
                     <ul>
@@ -1478,7 +1478,7 @@
 Agende uma visita e conheça os nossos imóveis!</p>
                     </div>
                     <div class="img-container">
-                        <img src="../public/agent-photo.jpeg">
+                        <img src="public/agent-photo.jpeg">
 
                     </div>
                 </div>
@@ -1868,27 +1868,20 @@ Agende uma visita e conheça os nossos imóveis!</p>
         document.head.appendChild(styleSheet);
 
 
-        // Configuração Google Sheets
-const SHEET_ID = '1Xq8suuHEH3j2KVDeCRJQ-Sd5jQDn2P_fzI82ntUjAJU';
-const API_KEY = 'AIzaSyBTL4Da-8TZGr2KGyGlAwjwu4QQf4BIBOY'; 
-const RANGE = 'imoveis!A:J';
-
-let currentSheetsSlide = 0;
+        let currentSheetsSlide = 0;
 let sheetsProperties = [];
 
-// Função para buscar dados da planilha
+// Função para buscar dados da planilha via backend seguro
 async function loadSheetsProperties() {
     try {
-        const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`;
-        const response = await fetch(url);
+        const response = await fetch('/api/sheet'); // chama rota serverless
         const data = await response.json();
         
         if (!data.values || data.values.length <= 1) {
             throw new Error('Nenhum dados encontrado na planilha');
         }
 
-        const headers = data.values[0];
-        const rows = data.values.slice(1);
+        const rows = data.values.slice(1); // pula cabeçalho
         
         sheetsProperties = rows.map(row => ({
             id: row[0] || '',
@@ -1927,7 +1920,6 @@ function renderSheetsCarousel() {
     indicators.innerHTML = '';
 
     sheetsProperties.forEach((property, index) => {
-        // Criar card do imóvel
         const card = document.createElement('div');
         card.className = 'sheets-property-card';
         card.innerHTML = `
@@ -1966,7 +1958,6 @@ function renderSheetsCarousel() {
         `;
         track.appendChild(card);
 
-        // Criar indicador
         const indicator = document.createElement('div');
         indicator.className = `sheets-indicator ${index === 0 ? 'active' : ''}`;
         indicator.onclick = () => goToSheetsSlide(index);
@@ -1981,34 +1972,29 @@ function formatSheetsPrice(price) {
     return numPrice.toLocaleString('pt-BR');
 }
 
-// Funções de navegação do carrossel
+// Navegação
 function nextSheetsSlide() {
     currentSheetsSlide = (currentSheetsSlide + 1) % sheetsProperties.length;
     updateSheetsCarousel();
 }
-
 function prevSheetsSlide() {
     currentSheetsSlide = (currentSheetsSlide - 1 + sheetsProperties.length) % sheetsProperties.length;
     updateSheetsCarousel();
 }
-
 function goToSheetsSlide(index) {
     currentSheetsSlide = index;
     updateSheetsCarousel();
 }
-
 function updateSheetsCarousel() {
     const track = document.getElementById('sheets-carousel-track');
     const indicators = document.querySelectorAll('.sheets-indicator');
-    
     track.style.transform = `translateX(-${currentSheetsSlide * 100}%)`;
-    
     indicators.forEach((indicator, index) => {
         indicator.classList.toggle('active', index === currentSheetsSlide);
     });
 }
 
-// Auto-play do carrossel
+// Auto-play
 function startSheetsAutoPlay() {
     setInterval(() => {
         if (sheetsProperties.length > 1) {
