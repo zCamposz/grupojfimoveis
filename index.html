@@ -1869,69 +1869,211 @@ Agende uma visita e conheça os nossos imóveis!</p>
 
 
         // Configuração Google Sheets
-const SHEET_ID = '1Xq8suuHEH3j2KVDeCRJQ-Sd5jQDn2P_fzI82ntUjAJU';
-const API_KEY = 'AIzaSyBTL4Da-8TZGr2KGyGlAwjwu4QQf4BIBOY'; 
-const RANGE = 'imoveis!A:J';
+// ALTERNATIVA MAIS SIMPLES - Substitua o JavaScript no seu HTML
+// Esta versão faz a chamada direta ao Google Sheets (como estava antes)
+// mas com melhor tratamento de erro
 
 let currentSheetsSlide = 0;
 let sheetsProperties = [];
 
-// Função para buscar dados da planilha
+// Configurações - deixe público novamente para testar
+const SHEET_CONFIG = {
+    SHEET_ID: '1Xq8suuHEH3j2KVDeCRJQ-Sd5jQDn2P_fzI82ntUjAJU',
+    API_KEY: 'AIzaSyBTL4Da-8TZGr2KGyGlAwjwu4QQf4BIBOY',
+    RANGE: 'imoveis!A:J'
+};
+
+// Função que chama DIRETAMENTE o Google Sheets (sem API route)
 async function loadSheetsProperties() {
+    console.log('🚀 Carregando imóveis diretamente do Google Sheets...');
+    
+    const loadingEl = document.getElementById('sheets-loading');
+    const containerEl = document.getElementById('sheets-carousel-container');
+    const errorEl = document.getElementById('sheets-error');
+    
     try {
-        const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`;
+        // Mostrar loading
+        if (loadingEl) {
+            loadingEl.innerHTML = 'Carregando imóveis do Google Sheets...';
+            loadingEl.style.display = 'block';
+        }
+        if (containerEl) containerEl.style.display = 'none';
+        if (errorEl) errorEl.style.display = 'none';
+        
+        // URL direta para Google Sheets API
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_CONFIG.SHEET_ID}/values/${SHEET_CONFIG.RANGE}?key=${SHEET_CONFIG.API_KEY}`;
+        
+        console.log('📡 Fazendo fetch diretamente para Google Sheets...');
+        console.log('📝 Sheet ID:', SHEET_CONFIG.SHEET_ID);
+        
         const response = await fetch(url);
+        
+        console.log('📡 Response status:', response.status);
+        console.log('📡 Response ok:', response.ok);
+        
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('❌ Google Sheets Error:', errorText);
+            throw new Error(`Erro ${response.status}: ${errorText}`);
+        }
+        
         const data = await response.json();
         
+        console.log('📊 Dados recebidos:', {
+            hasValues: !!data.values,
+            rowCount: data.values ? data.values.length : 0
+        });
+        
         if (!data.values || data.values.length <= 1) {
-            throw new Error('Nenhum dados encontrado na planilha');
+            console.log('⚠️ Planilha vazia ou só com headers');
+            throw new Error('Planilha vazia ou configurada incorretamente');
         }
 
         const headers = data.values[0];
         const rows = data.values.slice(1);
         
-        sheetsProperties = rows.map(row => ({
-            id: row[0] || '',
-            name: row[1] || 'Sem nome',
+        console.log('📋 Headers encontrados:', headers);
+        console.log('📋 Número de linhas:', rows.length);
+        
+        sheetsProperties = rows.map((row, index) => ({
+            id: row[0] || `prop_${index}`,
+            name: row[1] || `Imóvel ${index + 1}`,
             price: row[2] || '0',
             location: row[3] || 'Localização não informada',
             bedrooms: row[4] || '0',
             bathrooms: row[5] || '0',
             area: row[6] || '0',
             parking: row[7] || '0',
-            image: row[8] || 'https://via.placeholder.com/800x400?text=Sem+Imagem',
+            image: row[8] || `https://picsum.photos/800/400?random=${index}`,
             type: row[9] || 'Imóvel'
         }));
 
-        renderSheetsCarousel();
-        document.getElementById('sheets-loading').style.display = 'none';
-        document.getElementById('sheets-carousel-container').style.display = 'block';
-        
-        if (sheetsProperties.length > 1) {
-            startSheetsAutoPlay();
+        console.log('✅ Propriedades processadas:', sheetsProperties.length);
+        console.log('🏠 Primeira propriedade:', sheetsProperties[0]);
+
+        // Renderizar se tiver dados
+        if (sheetsProperties.length > 0) {
+            renderSheetsCarousel();
+            if (loadingEl) loadingEl.style.display = 'none';
+            if (containerEl) containerEl.style.display = 'block';
+            
+            if (sheetsProperties.length > 1) {
+                startSheetsAutoPlay();
+            }
+            
+            console.log('✅ Carregamento concluído com sucesso!');
+        } else {
+            throw new Error('Nenhuma propriedade encontrada após processamento');
         }
         
     } catch (error) {
-        console.error('Erro ao carregar dados:', error);
-        document.getElementById('sheets-loading').style.display = 'none';
-        document.getElementById('sheets-error').style.display = 'block';
+        console.error('💥 ERRO ao carregar:', error);
+        
+        // Mostrar erro detalhado
+        if (loadingEl) loadingEl.style.display = 'none';
+        if (errorEl) {
+            errorEl.innerHTML = `
+                <h3>❌ Erro ao carregar imóveis</h3>
+                <p><strong>Detalhes:</strong> ${error.message}</p>
+                <p><strong>Possíveis causas:</strong></p>
+                <ul style="text-align: left; max-width: 500px; margin: 1rem auto;">
+                    <li>Planilha não é pública</li>
+                    <li>Sheet ID ou API Key incorretos</li>
+                    <li>Nome da aba diferente de "imoveis"</li>
+                    <li>Bloqueio de CORS pelo navegador</li>
+                </ul>
+                <button onclick="loadSheetsPropertiesWithFallback()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: #8B0000; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                    🔄 Usar Dados de Exemplo
+                </button>
+                <button onclick="loadSheetsProperties()" style="margin-top: 1rem; margin-left: 1rem; padding: 0.5rem 1rem; background: #006400; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                    🔄 Tentar Novamente
+                </button>
+            `;
+            errorEl.style.display = 'block';
+        }
+        
+        // NÃO carregar dados de exemplo automaticamente - deixar o usuário escolher
     }
 }
 
-// Função para renderizar o carrossel
+// Função para carregar dados de exemplo quando o usuário clicar
+function loadSheetsPropertiesWithFallback() {
+    console.log('🔄 Carregando dados de exemplo...');
+    
+    sheetsProperties = [
+        {
+            id: 'exemplo1',
+            name: 'Apartamento Luxo Vila Madalena',
+            price: '1200000',
+            location: 'Vila Madalena, São Paulo',
+            bedrooms: '3',
+            bathrooms: '2',
+            area: '120',
+            parking: '2',
+            image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            type: 'Apartamento'
+        },
+        {
+            id: 'exemplo2',
+            name: 'Casa Moderna Jardins',
+            price: '2850000',
+            location: 'Jardins, São Paulo',
+            bedrooms: '4',
+            bathrooms: '3',
+            area: '280',
+            parking: '3',
+            image: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            type: 'Casa'
+        },
+        {
+            id: 'exemplo3',
+            name: 'Cobertura Premium Itaim',
+            price: '4500000',
+            location: 'Itaim Bibi, São Paulo',
+            bedrooms: '5',
+            bathrooms: '4',
+            area: '400',
+            parking: '4',
+            image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            type: 'Cobertura'
+        }
+    ];
+
+    renderSheetsCarousel();
+    document.getElementById('sheets-loading').style.display = 'none';
+    document.getElementById('sheets-error').style.display = 'none';
+    document.getElementById('sheets-carousel-container').style.display = 'block';
+    
+    if (sheetsProperties.length > 1) {
+        startSheetsAutoPlay();
+    }
+    
+    console.log('✅ Dados de exemplo carregados!');
+}
+
+// Resto das funções permanecem iguais...
 function renderSheetsCarousel() {
+    console.log('🎨 Renderizando carrossel com', sheetsProperties.length, 'propriedades');
+    
     const track = document.getElementById('sheets-carousel-track');
     const indicators = document.getElementById('sheets-indicators');
+    
+    if (!track || !indicators) {
+        console.error('❌ Elementos do carrossel não encontrados');
+        return;
+    }
     
     track.innerHTML = '';
     indicators.innerHTML = '';
 
     sheetsProperties.forEach((property, index) => {
-        // Criar card do imóvel
         const card = document.createElement('div');
         card.className = 'sheets-property-card';
         card.innerHTML = `
-            <img src="${property.image}" alt="${property.name}" class="sheets-property-image" onerror="this.src='https://via.placeholder.com/800x400?text=Imagem+Indisponível'">
+            <img src="${property.image}" 
+                 alt="${property.name}" 
+                 class="sheets-property-image" 
+                 onerror="this.src='https://via.placeholder.com/800x400/8B0000/white?text=Imóvel+${index + 1}'">
             <div class="sheets-property-content">
                 <div class="sheets-property-type">${property.type}</div>
                 <div class="sheets-property-header">
@@ -1959,14 +2101,15 @@ function renderSheetsCarousel() {
                         <div class="sheets-detail-value">${property.parking}</div>
                     </div>
                 </div>
-                <a href="https://wa.me/5511985001595?text=Olá! Vi o imóvel '${encodeURIComponent(property.name)}'" class="whatsapp-btn" target="_blank">
+                <a href="https://wa.me/5511985001595?text=Olá! Vi o imóvel '${encodeURIComponent(property.name)}'" 
+                   class="whatsapp-btn" 
+                   target="_blank">
                     <i class="fa-brands fa-whatsapp"></i> Tenho Interesse
                 </a>
             </div>
         `;
         track.appendChild(card);
 
-        // Criar indicador
         const indicator = document.createElement('div');
         indicator.className = `sheets-indicator ${index === 0 ? 'active' : ''}`;
         indicator.onclick = () => goToSheetsSlide(index);
@@ -1974,14 +2117,12 @@ function renderSheetsCarousel() {
     });
 }
 
-// Função para formatar preço
 function formatSheetsPrice(price) {
     const numPrice = parseFloat(price.toString().replace(/[^\d,.-]/g, '').replace(',', '.'));
     if (isNaN(numPrice)) return price;
     return numPrice.toLocaleString('pt-BR');
 }
 
-// Funções de navegação do carrossel
 function nextSheetsSlide() {
     currentSheetsSlide = (currentSheetsSlide + 1) % sheetsProperties.length;
     updateSheetsCarousel();
@@ -2001,6 +2142,8 @@ function updateSheetsCarousel() {
     const track = document.getElementById('sheets-carousel-track');
     const indicators = document.querySelectorAll('.sheets-indicator');
     
+    if (!track) return;
+    
     track.style.transform = `translateX(-${currentSheetsSlide * 100}%)`;
     
     indicators.forEach((indicator, index) => {
@@ -2008,7 +2151,6 @@ function updateSheetsCarousel() {
     });
 }
 
-// Auto-play do carrossel
 function startSheetsAutoPlay() {
     setInterval(() => {
         if (sheetsProperties.length > 1) {
@@ -2017,9 +2159,10 @@ function startSheetsAutoPlay() {
     }, 5000);
 }
 
-// Carregar quando a página carregar
+// Inicialização
 document.addEventListener('DOMContentLoaded', () => {
-    loadSheetsProperties();
+    console.log('🌟 Página carregada, iniciando...');
+    setTimeout(loadSheetsProperties, 1000);
 });
 
     </script>
