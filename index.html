@@ -144,7 +144,7 @@
         /* Hero Section */
         .hero {
             position: relative;
-            background: url('public/hero-bg.jpeg') no-repeat center center;
+            background: url('/hero-bg.jpeg') no-repeat center center;
             background-size: cover;
             color: white;
             text-align: center;
@@ -473,7 +473,7 @@
         /* Contact Section - GRADIENTE DIFERENTE PARA FINALIZAR */
         .contact {
             position: relative;
-            background: url('public/foto.jpeg') no-repeat center center;
+            background: url('/foto.jpeg') no-repeat center center;
             background-size: cover;
             color: white;
             text-align: center;
@@ -933,7 +933,7 @@
     /* HERO - Proporções melhores */
     .hero {
         position: relative;
-        background: url('public/hero-bg.jpeg') no-repeat center center;
+        background: url('/hero-bg.jpeg') no-repeat center center;
         background-size: cover;
         color: white;
         text-align: center;
@@ -1242,7 +1242,7 @@
     /* CONTACT - Com imagem de fundo restaurada */
     .contact {
         position: relative;
-        background: url('public/foto.jpeg') no-repeat center center;
+        background: url('/foto.jpeg') no-repeat center center;
         background-size: cover;
         background-attachment: scroll; /* Para mobile */
         color: white;
@@ -1445,7 +1445,7 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <img src="public/imagem.png" style="height:55px; vertical-align: middle; margin-right:10px;"> Grupo JF Imoveis
+                    <img src="/imagem.png" style="height:55px; vertical-align: middle; margin-right:10px;"> Grupo JF Imoveis
                 </div>
                 <nav>
                     <ul>
@@ -1478,7 +1478,7 @@
 Agende uma visita e conheça os nossos imóveis!</p>
                     </div>
                     <div class="img-container">
-                        <img src="public/agent-photo.jpeg">
+                        <img src="/agent-photo.jpeg">
 
                     </div>
                 </div>
@@ -1825,18 +1825,7 @@ Agende uma visita e conheça os nossos imóveis!</p>
             });
         });
 
-        // PWA Service Worker (opcional)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(function(registration) {
-                        console.log('SW registered: ', registration);
-                    })
-                    .catch(function(registrationError) {
-                        console.log('SW registration failed: ', registrationError);
-                    });
-            });
-        }
+        
 
         // Adicionar estilos CSS para validação
         const validationStyles = `
