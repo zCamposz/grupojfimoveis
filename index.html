@@ -73,9 +73,9 @@
 
         /* Header */
         header {
-            background: rgba(240, 236, 236, 0.95);
+            background: rgba(212, 212, 212, 0.95);
             backdrop-filter: blur(10px);
-            padding: 1rem;
+            padding: 0.7rem;
             position: absolute;
             width: 100%;
             top: 0;
@@ -85,6 +85,7 @@
         }
 
         .header-content {
+            font-size: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -93,7 +94,7 @@
         .logo {
             font-size: 2rem;
             font-weight: bold;
-            background: linear-gradient(45deg, #000000ff, #000000ff);
+            background: linear-gradient(45deg, rgb(255, 255, 255), rgb(255, 255, 255));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -107,7 +108,7 @@
 
         nav a {
             text-decoration: none;
-            color: rgba(0, 0, 0, 0.95);
+            color: rgba(255, 255, 255, 0.95);
             font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
@@ -137,7 +138,7 @@
         /* Main Content - PÁGINA UNIFICADA */
         main {
             margin-top: 80px;
-            background: linear-gradient(135deg, rgb(240, 237, 237) 0%, rgb(230, 228, 228) 100%);
+            background: linear-gradient(135deg, rgba(233, 229, 229, 0.95) 0%, rgba(241, 238, 238, 0.95) 100%);
             min-height: calc(100vh - 80px);
             box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
         }
@@ -204,7 +205,7 @@
 
         /* About Section - SEM FUNDO SEPARADO */
         .about {
-            padding: 15rem 0;
+            padding: 8rem 0;
         }
 
         .about-content {
@@ -237,7 +238,7 @@
             height: 400px;
             border-radius: 50%;
             padding: 10px; /* Espaço para a borda */
-            background: linear-gradient(135deg, rgb(0, 0, 0), rgb(153, 153, 153)); /* Gradiente mais vibrante */
+            background: linear-gradient(135deg, rgb(228, 228, 228), rgb(66, 66, 66)); /* Gradiente mais vibrante */
             box-shadow: 0 0 20px rgba(0,0,0,0.4); /* Sombra para destacar */
             display: flex;
             align-items: center;
@@ -289,88 +290,6 @@
             padding: 10rem 0;
         }
 
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #ffffff;
-        }
-
-        .properties-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .property-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .property-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .property-image {
-            height: 250px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-
-        .property-price {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: linear-gradient(45deg, #c20909, #5e0505);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .property-info {
-            padding: 1.5rem;
-        }
-
-        .property-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-        }
-
-        .property-location {
-            color: #e0e0e0;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .property-features {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            color: #e0e0e0;
-            font-size: 0.9rem;
-        }
-
         .whatsapp-btn {
             width: 100%;
             padding: 0.8rem;
@@ -410,6 +329,8 @@
         .section-title {
             color: #000000;
             font-weight: bold;
+            text-align: center;
+            margin-bottom: 3rem;
         }
 
         /* Contact Section - GRADIENTE DIFERENTE PARA FINALIZAR */
@@ -419,7 +340,7 @@
             background-size: cover;
             color: white;
             text-align: center;
-            padding: 1rem;
+            padding: 8px;
             border-radius: 0 0 0 0;
             overflow: hidden;
         }
@@ -565,7 +486,7 @@
 
         /* Carrossel Google Sheets */
 .sheets-carousel-container {
-    margin: 3rem 0;
+    margin: 20px 0;
     position: relative;
 }
 
@@ -742,6 +663,28 @@
     background: rgba(255, 107, 107, 0.1);
     border-radius: 10px;
     margin: 2rem 0;
+}
+
+.btn-canal {
+      display: inline-block;
+      background: red;
+      color: white;
+      font-weight: bold;
+      padding: 12px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+.btn-insta {
+    display: inline-block;
+    background: rgba(255, 0, 191, 0.589);
+    color: white;
+    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
 }
 
 /* Responsive para carrossel */
@@ -1352,7 +1295,7 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <img src="imagem.png" style="height:55px; vertical-align: middle; margin-right:10px;"></div>
+                    <img src="imagem.png" style="height: 55px;">Grupo JF Imóveis</div>
                 <nav>
                     <ul>
                         <li><a href="#inicio">Início</a></li>
@@ -1378,12 +1321,17 @@
             <div class="container">
                 <div class="about-content">
                     <div class="about-text">
-                        <h2>Conheça nosso Canal no Youtube e fique por dentro</h2>
-                        <a href="https://www.youtube.com/@grupojfimoveis" target="_blank">Visitar Canal</a>
+                        <h2>Conheça nosso Canal no Youtube e fique por dentro.</h2>
+                        <a href="https://www.youtube.com/@grupojfimoveis" target="_blank" class="btn-canal">Visitar Canal</a>
+                        <i class="fa-brands fa-youtube" style="font-size: 40px; color: #FF0000; margin-left: 10px;"></i>
+                        <div style="margin-top: 20px;">
+                        <a href="https://www.instagram.com/grupojfimoveis/" target="_blank" class="btn-insta">Visitar Instagram</a>
+                        <i class="fa-brands fa-instagram" style="font-size: 40px; color: #C13584; margin-left: 10px;"></i>
+                        <h2 style="margin-top: 20px;">Acompanhe também nosso Instagram.</h2>
+                        </div>
                     </div>
                     <div class="img-container">
                         <img src="agent-photo.jpeg">
-                        
                     </div>
                 </div>
             </div>
