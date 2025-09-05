@@ -37,8 +37,6 @@
     </script>
     <noscript><img height="1" width="1" style="display:none"
         src="https://www.facebook.com/tr?id=SEU_PIXEL_ID_AQUI&ev=PageView&noscript=1"/></noscript>
-
-    <!-- Google Analytics (substitua pelo seu ID) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -71,14 +69,16 @@
         }
 
         header {
-            background: rgba(212, 212, 212, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 0.7rem;
-            position: absolute;
-            width: 100%;
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(116, 116, 116, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
         }
 
@@ -134,10 +134,10 @@
         }
 
         main {
-            margin-top: 80px;
-            background: linear-gradient(135deg, rgba(233, 229, 229, 0.95) 0%, rgba(241, 238, 238, 0.95) 100%);
-            min-height: calc(100vh - 80px);
-            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(180deg, #ffffff 0%, #000000 100%);
+            background-attachment: fixed;
+            color: var(--text-color);
+            line-height: 1.6;
         }
 
         .hero {
@@ -146,9 +146,10 @@
             background-size: cover;
             color: white;
             text-align: center;
-            padding: 9rem 0;
+            padding: 17rem 0;
             border-radius: 0px 0px 0px 0px;
             overflow: hidden;
+            margin-bottom: 100px;
         }
 
         .hero::before {
@@ -213,7 +214,7 @@
         .about-text h2 {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            color: #000000;
+            color: #ffffff;
         }
 
         .about-text p {
@@ -229,23 +230,23 @@
         }
 
         .img-container {
-            width: 400px; /* Aumenta o tamanho da imagem */
+            width: 400px;
             height: 400px;
             border-radius: 50%;
-            padding: 10px; /* Espaço para a borda */
-            background: linear-gradient(135deg, rgb(172, 172, 172), rgb(36, 36, 36)); /* Gradiente mais vibrante */
-            box-shadow: 0 0 20px rgba(0,0,0,0.4); /* Sombra para destacar */
+            padding: 10px;
+            background: linear-gradient(135deg, rgb(172, 172, 172), rgb(36, 36, 36));
+            box-shadow: 0 0 20px rgba(0,0,0,0.4); 
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-            .img-container img {
+        .img-container img {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            object-position: center 15%; /* foca mais na parte superior da imagem */
+            object-position: center 15%;
             box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
         }
 
@@ -320,7 +321,7 @@
         }
 
         .section-title {
-            color: #000000;
+            color: #ffffff;
             font-weight: bold;
             text-align: center;
             margin-bottom: 3rem;
@@ -332,7 +333,7 @@
             background-size: cover;
             color: white;
             text-align: center;
-            padding: 8px;
+            padding: 80px;
             border-radius: 0 0 0 0;
             overflow: hidden;
         }
@@ -350,7 +351,7 @@
 
         .contact > * {
             position: relative;
-            z-index: 2; /* garante que o conteúdo fique acima da camada escura */
+            z-index: 2;
         }
 
         .contact h2 {
@@ -473,10 +474,12 @@
         }
 
         .sheets-carousel-container {
-            margin: 20px 0;
+            margin: 20px auto;
             position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
+            max-width: 100%;
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
         }
 
         .sheets-carousel {
@@ -484,11 +487,13 @@
             border-radius: 20px;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
             background: linear-gradient(145deg, #f0f0f0, #e6e6e6);
+            width: 100%;
         }
 
         .sheets-carousel-track {
             display: flex;
             transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            width: 100%;
         }
 
         .sheets-property-card {
@@ -498,11 +503,16 @@
             overflow: hidden;
             box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.1);
             position: relative;
+            display: flex;
+            flex-direction: column;
+            height: auto;
         }
 
         .sheets-property-image {
             width: 100%;
-            height: 450px;
+            height: 60vh;
+            min-height: 300px;
+            max-height: 500px;
             object-fit: cover;
             display: block;
             position: relative;
@@ -519,31 +529,38 @@
         }
 
         .sheets-property-content {
-            padding: 2.5rem;
+            padding: 1.5rem;
             background: linear-gradient(145deg, #dbd9d9, #dbd7d7);
             position: relative;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .sheets-property-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             padding-bottom: 1rem;
             border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .sheets-property-name {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: #000000;
             margin-bottom: 0.5rem;
             font-weight: 700;
             letter-spacing: -0.5px;
             text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+            flex: 1;
+            min-width: 200px;
         }
 
         .sheets-property-price {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-weight: 800;
             color: #000000;
             text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
@@ -551,12 +568,13 @@
             padding: 0.5rem 1rem;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            white-space: nowrap;
         }
 
         .sheets-property-location {
             color: #333333;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -570,14 +588,14 @@
 
         .sheets-property-details {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .sheets-detail-item {
             background: linear-gradient(145deg, #f0f0f0, #e6e6e6);
-            padding: 1.5rem;
+            padding: 1rem;
             border-radius: 15px;
             text-align: center;
             border: 2px solid rgba(255, 255, 255, 0.3);
@@ -603,16 +621,16 @@
         }
 
         .sheets-detail-label {
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             color: #555555;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .sheets-detail-value {
-            font-size: 1.4rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: #000000;
             text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
@@ -621,12 +639,12 @@
         .sheets-property-type {
             background: linear-gradient(45deg, #000000, #313131);
             color: white;
-            padding: 0.8rem 1.5rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 25px;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             display: inline-block;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -656,11 +674,11 @@
             background: rgba(0, 0, 0, 0.8);
             color: white;
             border: none;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             z-index: 10;
             backdrop-filter: blur(10px);
@@ -670,29 +688,30 @@
         .sheets-carousel-nav:hover {
             background: rgba(255, 255, 255, 0.9);
             color: #000000;
-            transform: translateY(-50%) scale(1.15);
+            transform: translateY(-50%) scale(1.1);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
         .sheets-carousel-nav.prev {
-            left: -30px;
+            left: 10px;
         }
 
         .sheets-carousel-nav.next {
-            right: -30px;
+            right: 10px;
         }
 
         .sheets-carousel-indicators {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-top: 3rem;
+            gap: 1rem;
+            margin-top: 2rem;
             padding: 1rem;
+            flex-wrap: wrap;
         }
 
         .sheets-indicator {
-            width: 15px;
-            height: 15px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             background: rgba(0, 0, 0, 0.2);
             cursor: pointer;
@@ -707,8 +726,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             background: transparent;
             transition: all 0.3s ease;
@@ -716,7 +735,7 @@
 
         .sheets-indicator.active {
             background: #000000;
-            transform: scale(1.3);
+            transform: scale(1.2);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
@@ -726,14 +745,14 @@
 
         .sheets-indicator:hover:not(.active) {
             background: rgba(0, 0, 0, 0.4);
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .sheets-loading {
             text-align: center;
-            padding: 4rem;
+            padding: 3rem;
             color: #000000;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 600;
             background: linear-gradient(145deg, #f0f0f0, #e6e6e6);
             border-radius: 15px;
@@ -755,7 +774,7 @@
 
         .sheets-error {
             text-align: center;
-            padding: 3rem;
+            padding: 2rem;
             color: #d32f2f;
             background: linear-gradient(145deg, rgba(255, 107, 107, 0.1), rgba(255, 107, 107, 0.05));
             border-radius: 15px;
@@ -1408,11 +1427,12 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <img src="imagem.png" style="height: 55px;">Grupo JF Imóveis</div>
+                    <img src="imagem.png" style="height: 55px;"><span style="font-family: 'Cinzel', 'Times New Roman', serif; font-weight: 600; letter-spacing: 0.10em; text-transform: uppercase;">Grupo JF Imóveis</span>
+                </div>
                 <nav>
                     <ul>
                         <li><a href="#inicio">Início</a></li>
-                        <li><a href="#sobre">Quem Somos</a></li>
+                        <li><a href="#sobre">Conheça-nos</a></li>
                         <li><a href="#imoveis">Imóveis</a></li>
                         <li><a href="#contato">Contato</a></li>
                     </ul>
